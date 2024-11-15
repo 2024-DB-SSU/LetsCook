@@ -1,0 +1,79 @@
+/* 페이지 전체 스타일 */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('./images/index_img.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+/* 메인 컨테이너 */
+#main-holder {
+    width: 70%;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    text-align: center;
+    font-size: 3em;
+    margin-bottom: 40px;
+}
+
+/* 로그인 및 회원가입 폼 컨테이너 */
+.form-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    gap: 80px; /* 폼 사이의 간격을 더 넓게 설정 */
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.7); /* 투명도 70% 적용 */
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.form-field {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #3a3a3a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #2e2e2e;
+}

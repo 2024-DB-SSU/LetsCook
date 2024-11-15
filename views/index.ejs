@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Let's Cook</title>
+    <link rel="stylesheet" href="index.css">
+    <!-- <script defer src="login-page.js"></script> -->
+</head>
+
+<body>
+    <main id="main-holder">
+        <h1 id="login-header">Let's Cook</h1>
+
+        <div class="form-container" action="/log_in" method="POST">
+            <!-- 로그인 폼 -->
+            <form id="login-form">
+                <h2>Login</h2>
+                <input type="text" name="username" class="form-field" placeholder="User Name">
+                <input type="password" name="password" class="form-field" placeholder="Password">
+                <button type="submit" id="login-form-submit">Login</button>
+            </form>
+
+            <!-- 회원가입 폼 -->
+            <form id="signup-form" action="/sign_in" method="POST">
+                <h2>Sign Up</h2>
+                <input type="text" name="username" class="form-field" placeholder="User Name">
+                <input type="password" name="password" class="form-field" placeholder="Password">
+                <input type="email" name="email" class="form-field" placeholder="Email">
+                <button type="submit" id="signup-form-submit">Sign up</button>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>
