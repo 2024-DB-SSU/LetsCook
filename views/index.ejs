@@ -13,20 +13,20 @@
     <main id="main-holder">
         <h1 id="login-header">Let's Cook</h1>
 
-        <div class="form-container" action="/log_in" method="POST">
+        <div class="form-container">
             <!-- 로그인 폼 -->
-            <form id="login-form">
+            <form id="login-form" action="/log_in" method="POST">
                 <h2>Login</h2>
-                <input type="text" name="username" class="form-field" placeholder="User Name">
-                <input type="password" name="password" class="form-field" placeholder="Password">
+                <input type="text" name="ID" class="form-field" placeholder="ID">
+                <input type="password" name="PWD" class="form-field" placeholder="Password">
                 <button type="submit" id="login-form-submit">Login</button>
             </form>
 
             <!-- 회원가입 폼 -->
             <form id="signup-form" action="/sign_in" method="POST">
                 <h2>Sign Up</h2>
-                <input type="text" name="username" class="form-field" placeholder="User Name">
-                <input type="password" name="password" class="form-field" placeholder="Password">
+                <input type="text" name="ID" class="form-field" placeholder="ID">
+                <input type="password" name="PWD" class="form-field" placeholder="Password">
                 <input type="email" name="email" class="form-field" placeholder="Email">
                 <button type="submit" id="signup-form-submit">Sign up</button>
             </form>
