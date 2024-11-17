@@ -1,8 +1,4 @@
-const db = require('./db');
-
-// 수정
-// db 클래스 따로 만들어서 Server가 db에 요청하는 방식으로
-// server가 status 관련 코드들을 받고, app.js에는 진짜 결과물만 보내주는게 좋을...까??
+const db = require('../db');
 
 class Server {
   constructor() {  
@@ -66,4 +62,4 @@ class Server {
 
 
 const server = new Server()
-module.exports = server;  // 클래스를 export 합니다.
+module.exports = server;  
