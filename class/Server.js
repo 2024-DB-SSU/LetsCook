@@ -9,16 +9,36 @@ class Server {
     
   }
 
-  async signin(ID, PWD, Email){
-    try {
-      const query = 'INSERT INTO User (ID, PWD, Email) VALUES (?, ?, ?)';
-      const values = [ID, PWD, Email];
-      await db.execute(query, values);
-      return {status : 200, error : 'No Error'}
-    } catch (err) {
-      console.error(err);
-      return {status : 500, error : 'Database query failed'}
+  async signin_verification(ID){
+    let result = await this.get_user_list();
+    let user_list = result.user_list;
+
+    for(const user of user_list){
+      if(ID === user.ID){
+        console.log("중복되는 아이디")
+        return {result : -1, message : '중복되는 아이디'}
+      }
     }
+    return {result : 1, message : '사용 가능한 아이디'}
+  }
+
+  async signin(ID, PWD, Email){
+    let result = await this.signin_verification(ID);
+    if (result.result === 1){
+      try {
+        const query = 'INSERT INTO User (ID, PWD, Email) VALUES (?, ?, ?)';
+        const values = [ID, PWD, Email];
+        await db.execute(query, values);
+        return {status : 200, message : '회원가입 성공'}
+      } catch (err) {
+        console.error(err);
+        return {status : 500, message : '서버 문제로 인한 에러'}
+      }
+    }
+    else{
+      return {status : 409, error : '이미 존재하는 아이디'}
+    }
+    
   }
 
   async get_user_list(){

@@ -5,11 +5,6 @@ class User {
     this.PWD = User_info.PWD;
     this.name = User_info.name;
     this.email = User_info.email;
-    this.phone = User_info.phone;
-  }
-
-  greet() {
-    console.log(`Hello, ${this.name}!`);
   }
 }
 

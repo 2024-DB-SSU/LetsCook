@@ -67,12 +67,11 @@ passport.deserializeUser(async (user, done) => {
   })
 })
 
-
-
-
 app.listen(8080, () => {
   console.log('http://localhost:8080 에서 실행 중입니다.');
 });
+
+
 // ======================================================================
 
 app.get('/', async(req, res) => {
@@ -83,7 +82,8 @@ app.get('/', async(req, res) => {
 app.post('/sign_in', async (req, res) => {
   console.log(req.body);
   let hashed = await bcrypt.hash(req.body.PWD, 10) 
-  const result = server.signin(req.body.ID, hashed, req.body.email);
+  const result = await server.signin(req.body.ID, hashed, req.body.email);
+  console.log(result);
   res.redirect("/");
 });
 
