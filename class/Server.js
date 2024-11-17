@@ -1,5 +1,8 @@
 const db = require('./db');
 
+// 수정
+// db 클래스 따로 만들어서 Server가 db에 요청하는 방식으로
+// server가 status 관련 코드들을 받고, app.js에는 진짜 결과물만 보내주는게 좋을...까??
 
 class Server {
   constructor() {  
@@ -18,6 +21,17 @@ class Server {
     }
   }
 
+  async get_user_list(){
+    try {
+      const query = 'SELECT * FROM User';
+      const user_list = await db.execute(query);
+      return {status : 200, error : 'No Error', user_list : user_list[0]}
+    } catch (err) {
+      console.error(err);
+      return {status : 500, error : 'Database query failed', user_list : NaN}
+    }
+  }
+
   async get_user(user_ID){
     try {
       const query = 'SELECT * FROM User WHERE ID = ?';
@@ -30,4 +44,6 @@ class Server {
   }
 }
 
-module.exports = Server;  // 클래스를 export 합니다.
+
+const server = new Server()
+module.exports = server;  // 클래스를 export 합니다.

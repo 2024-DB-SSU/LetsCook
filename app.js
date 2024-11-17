@@ -3,13 +3,11 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const passport = require('passport')
 const LocalStrategy = require('passport-local');
-const { Sequelize } = require('sequelize');
 const MySQLStore = require('express-mysql-session')(session);
 const User = require('./class/User');
 const Fridge = require('./class/Fridge'); 
-const Server = require('./class/Server'); 
 const app = express(); 
-const server = new Server()
+const server = require('./class/Server'); 
 
 app.use(express.static(__dirname + '/public'))
 app.use(express.json())
@@ -34,11 +32,14 @@ app.use(
     cookie : { maxAge : 60 * 60 * 1000 }
   })
 );
+
 app.use(passport.session());
 passport.use(new LocalStrategy({
   usernameField: 'ID',
   passwordField: 'PWD'
-}, async (ID, PWD, cb) => {
+}, async (username, password, cb) => {
+  let ID = username
+  let PWD = password
   let result = await server.get_user(ID);
   let user = result.user_info[0];
   if (!user) {
@@ -74,7 +75,7 @@ app.listen(8080, () => {
 });
 // ======================================================================
 
-app.get('/', (req, res) => {
+app.get('/', async(req, res) => {
   res.render('index.ejs')
 });
 
@@ -96,6 +97,21 @@ app.post('/log_in', async (req, res, next) => {
     })
   })(req, res, next)
 })
+
+app.get('/log_out', (req, res) => { 
+  req.logout((err) => {
+    if (err) {
+        return next(err); // 에러가 있을 경우 처리
+    }
+    req.session.destroy((err) => {
+      if(err){
+        return res.status(500).json({error : err});
+      }
+    })
+    res.redirect('/'); // 로그아웃 후 리다이렉트
+  });
+})
+
 
 
 app.get('/main', (req, res) => {
