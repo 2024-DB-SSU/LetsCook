@@ -114,7 +114,6 @@ app.get('/main', async(req, res) => {
     // 로그인 상태일 경우
     let result = await server.get_ingreds(req.user.ID)
     let ingreds = result.ingreds[0]
-    console.log(ingreds)
     res.render('main.ejs', {ingreds : ingreds})
   } else {
     // 로그인 상태가 아닐 경우
@@ -126,10 +125,23 @@ app.get('/main', async(req, res) => {
 
 
 // =============== 재료 등록 페이지 ===============
-app.get('/add_ingred', (req, res) => {
+app.get('/add_ingred', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
-    res.render('add_ingred.ejs')
+    let result = await server.get_ingreds(req.user.ID)
+    let ingreds = result.ingreds[0]
+    res.render('add_ingred.ejs', {ingreds : ingreds})
+  } else {
+    // 로그인 상태가 아닐 경우
+    res.redirect('/')
+  }
+});
+
+app.post('/add_ingred', async(req, res) => {
+  if (req.isAuthenticated()) {
+    // 로그인 상태일 경우
+    await server.add_ingreds(req.user.ID, req.body.ingredient, req.body.expiry)
+    res.redirect('/main')
   } else {
     // 로그인 상태가 아닐 경우
     res.redirect('/')

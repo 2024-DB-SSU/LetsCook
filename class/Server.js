@@ -69,6 +69,18 @@ class Server {
       return {status : 500, error : 'Database query failed', ingreds : NaN}
     }
   }
+
+  async add_ingreds(User_ID, ingred, expiry){
+    try {
+      const query = 'INSERT INTO Ingredient (User_ID, Name, Expiration) VALUES (?, ?, ?)';
+        const values = [User_ID, ingred, expiry];
+        await db.execute(query, values);
+        return {status : 200, error : 'No Error'}
+    } catch (err) {
+      console.error(err);
+      return {status : 500, error : 'Database query failed'}
+    }
+  }
 }
 
 
