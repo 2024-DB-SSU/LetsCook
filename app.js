@@ -76,7 +76,6 @@ app.get('/', async(req, res) => {
   res.render('index.ejs')
 });
 
-
 app.post('/sign_in', async (req, res) => {
   console.log(req.body);
   let hashed = await bcrypt.hash(req.body.PWD, 10) 
