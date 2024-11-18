@@ -22,10 +22,24 @@
         <!--필수 재료 냉장고-->
         <div class="fridge-section top">
           <div class="label essential">필수 재료</div>
+          <% for(let ingred of ingreds) { %>
+            <% if(ingred.Status === 1) { %>
+              <div>
+                <%= ingred.Name %>
+              </div> 
+            <% } %>
+          <% } %>
         </div>
         <!--전체 재료 냉장고-->
         <div class="fridge-section bottom">
           <div class="label all">전체 재료</div>
+          <% for(let ingred of ingreds) { %>
+            <% if(ingred.Status === 0) { %>
+              <div>
+                <%= ingred.Name %>
+              </div>
+            <% } %>
+          <% } %>
         </div>
     </div>
   </div>

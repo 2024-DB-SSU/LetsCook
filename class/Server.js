@@ -58,6 +58,17 @@ class Server {
       return {status : 500, error : 'Database query failed', user_info : NaN}
     }
   }
+
+  async get_ingreds(user_ID){
+    try {
+      const query = 'SELECT * FROM Ingredient WHERE User_ID = ?';
+      const ingreds = await db.execute(query, [user_ID]);
+      return {status : 200, error : 'No Error', ingreds : ingreds}
+    } catch (err) {
+      console.error(err);
+      return {status : 500, error : 'Database query failed', ingreds : NaN}
+    }
+  }
 }
 
 

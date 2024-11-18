@@ -109,12 +109,13 @@ app.get('/log_out', (req, res) => {
 
 
 // =============== 메인 페이지 ===============
-app.get('/main', (req, res) => {
+app.get('/main', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
-    console.log(req.user)
-    // ingreds = server.get_ingreds(req)
-    res.render('main.ejs')
+    let result = await server.get_ingreds(req.user.ID)
+    let ingreds = result.ingreds[0]
+    console.log(ingreds)
+    res.render('main.ejs', {ingreds : ingreds})
   } else {
     // 로그인 상태가 아닐 경우
     res.redirect('/')
