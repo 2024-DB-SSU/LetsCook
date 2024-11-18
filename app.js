@@ -4,10 +4,8 @@ const session = require('express-session');
 const passport = require('passport')
 const LocalStrategy = require('passport-local');
 const MySQLStore = require('express-mysql-session')(session);
-const User = require('./class/User');
-const Fridge = require('./class/Fridge'); 
+const { User, Fridge, server } = require('./class');
 const app = express(); 
-const server = require('./class/Server'); 
 
 app.use(express.static(__dirname + '/public'))
 app.use(express.json())
