@@ -1,11 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Let's Cook</title>
+  <link rel="stylesheet" href="main.css">
 </head>
+
 <body>
-  메인페이지
+  <!-- 상단 제목 -->
+  <header>
+    <h1>Let's Cook</h1>
+  </header>
+
+  <div class="container">
+    <!--왼쪽 영역(냉장고)-->
+    <div class="left-side">
+      <h2>My 냉장고</h2>
+      <div class="fridge">
+        <!--필수 재료 냉장고-->
+        <div class="fridge-section top">
+          <div class="label essential">필수 재료</div>
+        </div>
+        <!--전체 재료 냉장고-->
+        <div class="fridge-section bottom">
+          <div class="label all">전체 재료</div>
+        </div>
+    </div>
+  </div>
+
+  <!--오른쪽 영역(버튼)-->
+  <div class="right-side">
+    <div class="button-row">
+        <!-- 재료 등록 버튼을 a 태그로 변경 -->
+        <a href="/add_ingred" class="button">재료 등록</a>
+        <button onclick="navigate('이전 검색')">이전 검색</button>
+    </div>
+    <div class="button-row">
+        <button onclick="navigate('좋아요')">좋아요</button>
+        <button onclick="navigate('레시피 보기')">레시피 보기</button>
+    </div>
+    <div class="large-button">
+        <a href="/recipe1" class="button">레시피 추천</a>
+    </div>
+</div>
+
+  <!-- 로그아웃 버튼-->
+  <footer>
+    <a href="/log_out" class="logout-button">로그아웃</a>
+  </footer>
+
 </body>
 </html>

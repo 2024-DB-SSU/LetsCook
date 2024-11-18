@@ -117,3 +117,8 @@ app.get('/log_out', (req, res) => {
 app.get('/main', (req, res) => {
   res.render('main.ejs')
 });
+
+
+app.get('/add_ingred', (req, res) => {
+  res.render('add_ingred.ejs')
+});
