@@ -32,7 +32,7 @@ passport.use(
 
 passport.serializeUser((user, done) => {
   process.nextTick(() => {
-    done(null, { ID: user.ID, Email: user.Email });
+    done(null, { ID: user.ID, Email: user.Email, Name: user.Name });
   });
 });
 

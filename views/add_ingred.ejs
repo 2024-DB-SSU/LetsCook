@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>재료 등록</title>
+    <link rel="stylesheet" href="add_ingred.css">
+</head>
+
+<body>
+    <!-- 우 상단 제목 -->
+    <header>
+        <h1>Let's Cook</h1>
+    </header>
+
+    <div class="container">
+        <!-- 왼쪽 영역(냉장고) -->
+        <div class="left-side">
+            <h2>My 냉장고</h2>
+            <div class="fridge">
+                <!--위쪽 냉장고(필수 재료)-->
+                <div class="fridge-section top">
+                    <div class="label essential">필수 재료</div>
+                </div>
+                <!--아래쪽 냉장고(전체 재료)-->
+                <div class="fridge-section bottom">
+                    <div class="label all">전체 재료</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 오른쪽 영역(재료 등록)-->
+        <div class="right-side">
+            <form class="register-form">
+                <label for="ingredient">등록하실 재료를 입력하세요:</label>
+                <!--등록하실 재료는 text 형식-->
+                <input type="text" id="ingredient" placeholder="재료 이름">
+                <label for="expiry">유통기한을 입력하세요:</label>
+                <!--유통기한은 date 형식-->
+                <input type="date" id="expiry">
+                <button type="submit">등록</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 뒤로가기 버튼-->
+    <footer>
+        <a href="/main" class="back-button">뒤로가기</a>
+    </footer>
+
+</body>
+</html>

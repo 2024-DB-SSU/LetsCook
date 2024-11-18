@@ -1,0 +1,180 @@
+/* 기본 스타일 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+header {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+h1 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    width: 80%;
+    height: 80vh;
+    margin-top: 50px;
+    gap: 30px;
+}
+
+/* 왼쪽: 냉장고 */
+.left-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+}
+
+.left-side h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.fridge {
+    width: 90%;
+    height: 75vh;
+    background-color: rgba(200, 200, 200, 0.5);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.fridge-section {
+    width: 100%;
+    height: 50%;
+    border-bottom: 2px solid #999;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 20px;
+}
+
+.fridge-section.top {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.fridge-section.bottom {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom: none;
+}
+
+.label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #ddd;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.essential {
+    background-color: #ffcccb;
+}
+
+.all {
+    background-color: #b3d9ff;
+}
+
+/* 오른쪽: 버튼들 */
+.right-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* 공통 버튼 스타일 */
+.button {
+    display: inline-block;
+    background-color: #ddd;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    padding: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1.1rem;
+    flex: 1;
+    margin-right: 10px;
+}
+
+.button:hover {
+    background-color: #bbb;
+}
+
+/* 버튼 행 */
+.button-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+/* 레시피 추천 버튼 */
+.large-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.large-button .button.large {
+    width: 40%; /* 레시피 추천 버튼 너비 조정 */
+    background-color: #ccc;
+    padding: 20px;
+    border-radius: 15px;
+    font-size: 1.2rem;
+}
+
+.large-button .button.large:hover {
+    background-color: #aaa;
+}
+
+/* 로그아웃 버튼 스타일 */
+footer {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.logout-button {
+    background-color: #666;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 10px;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #444;
+}

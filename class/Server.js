@@ -18,12 +18,12 @@ class Server {
     return {result : 1, message : '사용 가능한 아이디'}
   }
 
-  async signin(ID, PWD, Email){
+  async signin(ID, PWD, Email, Name){
     let result = await this.signin_verification(ID);
     if (result.result === 1){
       try {
-        const query = 'INSERT INTO User (ID, PWD, Email) VALUES (?, ?, ?)';
-        const values = [ID, PWD, Email];
+        const query = 'INSERT INTO User (ID, PWD, Email, Name) VALUES (?, ?, ?, ?)';
+        const values = [ID, PWD, Email, Name];
         await db.execute(query, values);
         return {status : 200, message : '회원가입 성공'}
       } catch (err) {
