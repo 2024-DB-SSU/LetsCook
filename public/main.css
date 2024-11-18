@@ -94,11 +94,11 @@ h1 {
 }
 
 .essential {
-    background-color: #ffcccb; /* 필수 재료 색상 */
+    background-color: #ffcccb;
 }
 
 .all {
-    background-color: #b3d9ff; /* 전체 재료 색상 */
+    background-color: #b3d9ff;
 }
 
 /* 오른쪽: 버튼들 */
@@ -109,48 +109,52 @@ h1 {
     align-items: center;
     justify-content: center;
     padding: 20px;
+    gap: 20px;
 }
 
+/* 공통 버튼 스타일 */
+.button {
+    display: inline-block;
+    background-color: #ddd;
+    color: black;
+    text-decoration: none;
+    text-align: center;
+    padding: 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 1.1rem;
+    flex: 1;
+    margin-right: 10px;
+}
+
+.button:hover {
+    background-color: #bbb;
+}
+
+/* 버튼 행 */
 .button-row {
     display: flex;
     gap: 20px;
     margin-bottom: 30px;
 }
 
-.button-row button {
-    flex: 1;
-    background-color: #ddd;
-    border: none;
-    padding: 30px;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: 1.1rem;
-}
-
-.button-row button:hover {
-    background-color: #bbb;
-}
-
+/* 레시피 추천 버튼 */
 .large-button {
-    width: 100%;
     display: flex;
     justify-content: center;
     margin-top: 30px;
 }
 
-.large-button button {
-    width: 50%;
+.large-button .button.large {
+    width: 40%; /* 레시피 추천 버튼 너비 조정 */
     background-color: #ccc;
-    border: none;
-    padding: 30px;
+    padding: 20px;
     border-radius: 15px;
     font-size: 1.2rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-.large-button button:hover {
+.large-button .button.large:hover {
     background-color: #aaa;
 }
 
@@ -173,23 +177,4 @@ footer {
 
 .logout-button:hover {
     background-color: #444;
-}
-
-/* 공통 버튼 스타일 */
-.button {
-    display: inline-block;
-    background-color: #ddd;
-    color: black;
-    text-decoration: none;
-    text-align: center;
-    padding: 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    flex: 1;
-    margin-right: 10px;
-}
-
-.button:hover {
-    background-color: #bbb;
 }
