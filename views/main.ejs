@@ -24,7 +24,7 @@
           <div class="label essential">필수 재료</div>
           <% for(let ingred of ingreds) { %>
             <% if(ingred.Status === 1) { %>
-              <div>
+              <div class="button">
                 <%= ingred.Name %>
               </div> 
             <% } %>
@@ -35,7 +35,7 @@
           <div class="label all">전체 재료</div>
           <% for(let ingred of ingreds) { %>
             <% if(ingred.Status === 0) { %>
-              <div>
+              <div class="button">
                 <%= ingred.Name %>
               </div>
             <% } %>
