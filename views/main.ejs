@@ -47,12 +47,16 @@
   <!--오른쪽 영역(버튼)-->
   <div class="right-side">
     <div class="button-row">
-        <!-- 재료 등록 버튼을 a 태그로 변경 -->
+        <!--재료 등록 버튼을 a 태그로 변경-->
         <a href="/add_ingred" class="button">재료 등록</a>
-        <button onclick="navigate('이전 검색')" class="button">이전 검색</button>
+        <!--이전 검색 버튼을 a 태그로 병경-->
+        <a href="/recommend/previous" class="button">이전 검색</a>
+        <!-- <button onclick="navigate('이전 검색')" class="button">이전 검색</button> -->
     </div>
     <div class="button-row">
-        <button onclick="navigate('좋아요')" class="button">좋아요</button>
+        <!--좋아요를 a태그로-->
+        <a href="/likes" class="button">좋아요</a>
+        <!-- <button onclick="navigate('좋아요')" class="button">좋아요</button> -->
         <button onclick="navigate('레시피 보기')" class="button">레시피 보기</button>
     </div>
     <div class="large-button">

@@ -97,14 +97,14 @@ h1 {
     align-items: center;
     justify-content: flex-start;
     padding: 20px;
-    gap: 20px;
+    gap: 80px; /* 간격 추가로 아래로 이동 */
+    margin-top: 120px; /* 중앙으로 더 내려오도록 조정 */
 }
 
 .status-input {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 20px;
 }
 
 .status-input label {
@@ -123,68 +123,43 @@ h1 {
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-bottom: 30px;
 }
 
-.large-button button {
-    width: 50%;
+.large-button a {
+    display: inline-block;
+    width: 250px; /* 네모 형태 너비 */
+    height: 80px; /* 네모 형태 높이 */
     background-color: #ccc;
-    border: none;
-    padding: 30px;
     border-radius: 15px;
+    text-align: center;
+    line-height: 80px; /* 버튼 텍스트 수직 중앙 정렬 */
     font-size: 1.2rem;
-    cursor: pointer;
+    text-decoration: none;
+    color: black;
     transition: background-color 0.3s;
 }
 
-.large-button button:hover {
+.large-button a:hover {
     background-color: #aaa;
 }
 
-/* 추천된 레시피 박스 */
-.recipe-box {
-    width: 100%;
-    background-color: #f0f0f0;
-    padding: 20px;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.recipe-box h2 {
-    margin-bottom: 10px;
-}
-
-.recipe-content {
-    background-color: #ddd;
-    width: 100%;
-    height: 200px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    font-size: 1.2rem;
-}
-
-/* 뒤로가기 버튼 */
+/* 뒤로가기 버튼 스타일 */
 footer {
     position: absolute;
     bottom: 10px;
     right: 10px;
 }
 
-footer button {
+.logout-button {
     background-color: #666;
     color: white;
-    border: none;
+    text-decoration: none;
     padding: 15px;
     border-radius: 10px;
-    cursor: pointer;
+    display: inline-block;
     transition: background-color 0.3s;
 }
 
-footer button:hover {
+.logout-button:hover {
     background-color: #444;
 }
