@@ -93,6 +93,15 @@ class Server {
       return {status : 500, error : 'Database query failed'}
     }
   }
+
+  async cal_remaining_days(ingreds){
+    const today = new Date();
+    for(const ingred of ingreds){
+      const remainingDays = Math.ceil((ingred.Expiration - today) / (1000 * 60 * 60 * 24));
+      ingred["remainingDays"] = remainingDays;
+    }
+    return ingreds;
+  }
 }
 
 

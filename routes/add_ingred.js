@@ -35,5 +35,15 @@ router.get('/change_status', async(req, res) => {
   }
 });
 
+router.post('/delete_ingred', async(req, res) => {
+  if (req.isAuthenticated()) {
+    // 로그인 상태일 경우
+    
+    res.redirect('/add_ingred')
+  } else {
+    // 로그인 상태가 아닐 경우
+    res.redirect('/')
+  }
+});
 
 module.exports = router

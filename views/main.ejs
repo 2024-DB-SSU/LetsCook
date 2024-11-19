@@ -26,6 +26,7 @@
             <% if(ingred.Status === 1) { %>
               <div class="button">
                 <%= ingred.Name %>
+                <%= ingred.remainingDays %>
               </div> 
             <% } %>
           <% } %>
@@ -37,6 +38,7 @@
             <% if(ingred.Status === 0) { %>
               <div class="button">
                 <%= ingred.Name %>
+                <%= ingred.remainingDays %>
               </div>
             <% } %>
           <% } %>

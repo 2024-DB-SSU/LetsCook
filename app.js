@@ -113,12 +113,13 @@ app.get('/log_out', (req, res) => {
 app.get('/main', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
-    let result = await server.get_ingreds(req.user.ID)
-    let ingreds = result.ingreds[0]
-    res.render('main.ejs', {ingreds : ingreds})
+    let result = await server.get_ingreds(req.user.ID);
+    let ingreds = result.ingreds[0];
+    ingreds = await server.cal_remaining_days(ingreds);
+    res.render('main.ejs', {ingreds : ingreds});
   } else {
     // 로그인 상태가 아닐 경우
-    res.redirect('/')
+    res.redirect('/');
   }
 });
 // ========================================
