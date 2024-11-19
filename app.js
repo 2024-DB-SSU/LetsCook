@@ -188,7 +188,7 @@ app.get('/recommend/done', async(req, res) => {
 app.get('/recommend/recipe', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
-    res.render('recipe2.ejs')
+    res.render('recommend_recipe.ejs')
   } else {
     // 로그인 상태가 아닐 경우
     res.redirect('/')
@@ -198,7 +198,7 @@ app.get('/recommend/recipe', async(req, res) => {
 app.get('/recommend/previous', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
-    res.render('recipe2.ejs')
+    res.render('recommend_previous.ejs')
   } else {
     // 로그인 상태가 아닐 경우
     res.redirect('/')
@@ -212,7 +212,7 @@ app.get('/recommend/previous', async(req, res) => {
 app.get('/likes', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
-    res.render('recipe2.ejs')
+    res.render('likes.ejs')
   } else {
     // 로그인 상태가 아닐 경우
     res.redirect('/')
