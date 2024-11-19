@@ -195,7 +195,7 @@ app.get('/recommend/recipe', async(req, res) => {
   }
 });
 
-app.get('/recommend_previous', async(req, res) => {
+app.get('/recommend/previous', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
     res.render('recipe2.ejs')
