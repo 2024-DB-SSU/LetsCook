@@ -148,7 +148,7 @@ app.post('/add_ingred', async(req, res) => {
   }
 });
 
-app.post('/add_ingred/change_status', async(req, res) => {
+app.get('/add_ingred/change_status', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
     await server.change_ingred_status(req.user.ID, req.query.ingred_name, req.query.ingred_status)
