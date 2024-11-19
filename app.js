@@ -148,3 +148,30 @@ app.post('/add_ingred', async(req, res) => {
   }
 });
 // ========================================
+
+
+
+// =============== 레시피 추천 페이지 ===============
+app.get('/recommend', async(req, res) => {
+  if (req.isAuthenticated()) {
+    // 로그인 상태일 경우
+    let result = await server.get_ingreds(req.user.ID)
+    let ingreds = result.ingreds[0]
+    res.render('recipe1.ejs', {ingreds : ingreds})
+  } else {
+    // 로그인 상태가 아닐 경우
+    res.redirect('/')
+  }
+});
+
+
+app.get('/recommend/done', async(req, res) => {
+  if (req.isAuthenticated()) {
+    // 로그인 상태일 경우
+    res.render('recipe2.ejs')
+  } else {
+    // 로그인 상태가 아닐 경우
+    res.redirect('/')
+  }
+});
+// =============================================
