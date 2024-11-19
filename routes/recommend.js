@@ -6,34 +6,41 @@ router.get('', async(req, res) => {
     // 로그인 상태일 경우
     let result = await server.get_ingreds(req.user.ID)
     let ingreds = result.ingreds[0]
-    res.render('add_ingred.ejs', {ingreds : ingreds})
+    res.render('recipe1.ejs', {ingreds : ingreds})
   } else {
     // 로그인 상태가 아닐 경우
     res.redirect('/')
   }
 });
 
-router.post('', async(req, res) => {
+router.get('/done', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
-    await server.add_ingreds(req.user.ID, req.body.ingredient, req.body.expiry)
-    res.redirect('/add_ingred')
+    res.render('recipe2.ejs')
   } else {
     // 로그인 상태가 아닐 경우
     res.redirect('/')
   }
 });
 
-router.get('/change_status', async(req, res) => {
+router.get('/recipe', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
-    await server.change_ingred_status(req.user.ID, req.query.ingred_name, req.query.ingred_status)
-    res.redirect('/add_ingred')
+    res.render('recommend_recipe.ejs')
   } else {
     // 로그인 상태가 아닐 경우
     res.redirect('/')
   }
 });
 
+router.get('/previous', async(req, res) => {
+  if (req.isAuthenticated()) {
+    // 로그인 상태일 경우
+    res.render('recommend_previous.ejs')
+  } else {
+    // 로그인 상태가 아닐 경우
+    res.redirect('/')
+  }
+});
 
 module.exports = router
