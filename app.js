@@ -2,12 +2,8 @@
 const passport = require('./passport'); // 분리한 파일 불러오기
 const express = require('express');
 const session = require('express-session');
-<<<<<<< HEAD
 const passport = require('passport')
 const LocalStrategy = require('passport-local');
-=======
-const bcrypt = require('bcrypt');
->>>>>>> 0684b3a15bdc908962e29321876e8e911b4c9b5f
 const MySQLStore = require('express-mysql-session')(session);
 const { User, Fridge, server } = require('./class');
 const app = express();
@@ -113,7 +109,6 @@ app.get('/log_out', (req, res) => {
 
 
 
-<<<<<<< HEAD
 app.get('/main', (req, res) => {
   res.render('main.ejs')
 });
@@ -122,71 +117,3 @@ app.get('/main', (req, res) => {
 app.get('/add_ingred', (req, res) => {
   res.render('add_ingred.ejs')
 });
-=======
-// =============== 메인 페이지 ===============
-app.get('/main', async(req, res) => {
-  if (req.isAuthenticated()) {
-    // 로그인 상태일 경우
-    let result = await server.get_ingreds(req.user.ID)
-    let ingreds = result.ingreds[0]
-    res.render('main.ejs', {ingreds : ingreds})
-  } else {
-    // 로그인 상태가 아닐 경우
-    res.redirect('/')
-  }
-});
-// ========================================
-
-
-
-// =============== 재료 등록 페이지 ===============
-app.get('/add_ingred', async(req, res) => {
-  if (req.isAuthenticated()) {
-    // 로그인 상태일 경우
-    let result = await server.get_ingreds(req.user.ID)
-    let ingreds = result.ingreds[0]
-    res.render('add_ingred.ejs', {ingreds : ingreds})
-  } else {
-    // 로그인 상태가 아닐 경우
-    res.redirect('/')
-  }
-});
-
-app.post('/add_ingred', async(req, res) => {
-  if (req.isAuthenticated()) {
-    // 로그인 상태일 경우
-    await server.add_ingreds(req.user.ID, req.body.ingredient, req.body.expiry)
-    res.redirect('/add_ingred')
-  } else {
-    // 로그인 상태가 아닐 경우
-    res.redirect('/')
-  }
-});
-// ========================================
-
-
-
-// =============== 레시피 추천 페이지 ===============
-app.get('/recommend', async(req, res) => {
-  if (req.isAuthenticated()) {
-    // 로그인 상태일 경우
-    let result = await server.get_ingreds(req.user.ID)
-    let ingreds = result.ingreds[0]
-    res.render('recipe1.ejs', {ingreds : ingreds})
-  } else {
-    // 로그인 상태가 아닐 경우
-    res.redirect('/')
-  }
-});
-
-app.get('/recommend/done', async(req, res) => {
-  if (req.isAuthenticated()) {
-    // 로그인 상태일 경우
-    res.render('recipe2.ejs')
-  } else {
-    // 로그인 상태가 아닐 경우
-    res.redirect('/')
-  }
-});
-// =============================================
->>>>>>> 0684b3a15bdc908962e29321876e8e911b4c9b5f
