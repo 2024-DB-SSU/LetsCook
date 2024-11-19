@@ -164,20 +164,22 @@ footer button:hover {
 }
 
 /* 뒤로가기 버튼 스타일 */
-.back-button {
-    background-color: #666;
-    color: white;
-    text-decoration: none;
-    padding: 15px 20px;
-    border-radius: 10px;
-    display: inline-block;
-    cursor: pointer;
-    transition: background-color 0.3s;
+footer {
     position: absolute;
     bottom: 10px;
     right: 10px;
 }
 
-.back-button:hover {
+.logout-button {
+    background-color: #666;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 10px;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
     background-color: #444;
 }
