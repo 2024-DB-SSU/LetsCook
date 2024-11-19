@@ -147,6 +147,17 @@ app.post('/add_ingred', async(req, res) => {
     res.redirect('/')
   }
 });
+
+app.post('/add_ingred/change_status', async(req, res) => {
+  if (req.isAuthenticated()) {
+    // 로그인 상태일 경우
+    await server.change_ingred_status(req.user.ID, req.query.ingred_name, req.query.ingred_status)
+    res.redirect('/add_ingred')
+  } else {
+    // 로그인 상태가 아닐 경우
+    res.redirect('/')
+  }
+});
 // ========================================
 
 
@@ -173,4 +184,39 @@ app.get('/recommend/done', async(req, res) => {
     res.redirect('/')
   }
 });
+
+app.get('/recommend/recipe', async(req, res) => {
+  if (req.isAuthenticated()) {
+    // 로그인 상태일 경우
+    res.render('recipe2.ejs')
+  } else {
+    // 로그인 상태가 아닐 경우
+    res.redirect('/')
+  }
+});
+
+app.get('/recommend_previous', async(req, res) => {
+  if (req.isAuthenticated()) {
+    // 로그인 상태일 경우
+    res.render('recipe2.ejs')
+  } else {
+    // 로그인 상태가 아닐 경우
+    res.redirect('/')
+  }
+});
 // =============================================
+
+
+
+// ================ 좋아요 ====================
+app.get('/likes', async(req, res) => {
+  if (req.isAuthenticated()) {
+    // 로그인 상태일 경우
+    res.render('recipe2.ejs')
+  } else {
+    // 로그인 상태가 아닐 경우
+    res.redirect('/')
+  }
+});
+// ==========================================
+

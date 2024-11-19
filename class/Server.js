@@ -81,6 +81,18 @@ class Server {
       return {status : 500, error : 'Database query failed'}
     }
   }
+
+  async change_ingred_status(User_ID, ingred_name, ingred_status){
+    try {
+      const query = 'UPDATE Ingredient SET Status = ? WHERE User_ID = ? AND Name = ?';
+        const values = [ingred_status, User_ID, ingred_name];
+        await db.execute(query, values);
+        return {status : 200, error : 'No Error'}
+    } catch (err) {
+      console.error(err);
+      return {status : 500, error : 'Database query failed'}
+    }
+  }
 }
 
 
