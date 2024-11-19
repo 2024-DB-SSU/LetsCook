@@ -2,7 +2,7 @@ const db = require('../db');
 
 class Server {
   constructor() {  
-    
+    this.login_users = {};
   }
 
   async signin_verification(ID){
