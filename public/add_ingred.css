@@ -143,11 +143,39 @@ h1 {
 }
 
 /* 뒤로가기 버튼 스타일 */
+<<<<<<< HEAD
+=======
+footer {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+footer button {
+    background-color: #666;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+footer button:hover {
+    background-color: #444;
+}
+
+/* 뒤로가기 버튼 스타일 */
+>>>>>>> 0684b3a15bdc908962e29321876e8e911b4c9b5f
 .back-button {
     background-color: #666;
     color: white;
     text-decoration: none;
+<<<<<<< HEAD
     padding: 10px 15px; /* 텍스트에 딱 맞게 조정된 padding */
+=======
+    padding: 15px 20px;
+>>>>>>> 0684b3a15bdc908962e29321876e8e911b4c9b5f
     border-radius: 10px;
     display: inline-block;
     cursor: pointer;
@@ -155,10 +183,16 @@ h1 {
     position: absolute;
     bottom: 10px;
     right: 10px;
+<<<<<<< HEAD
     text-align: center;
+=======
+>>>>>>> 0684b3a15bdc908962e29321876e8e911b4c9b5f
 }
 
 .back-button:hover {
     background-color: #444;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0684b3a15bdc908962e29321876e8e911b4c9b5f

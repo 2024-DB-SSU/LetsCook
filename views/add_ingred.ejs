@@ -22,16 +22,37 @@
                 <!--위쪽 냉장고(필수 재료)-->
                 <div class="fridge-section top">
                     <div class="label essential">필수 재료</div>
+<<<<<<< HEAD
+=======
+                    <% for(let ingred of ingreds) { %>
+                        <% if(ingred.Status === 1) { %>
+                            <div>
+                                <%= ingred.Name %>
+                            </div> 
+                        <% } %>
+                    <% } %>
+>>>>>>> 0684b3a15bdc908962e29321876e8e911b4c9b5f
                 </div>
                 <!--아래쪽 냉장고(전체 재료)-->
                 <div class="fridge-section bottom">
                     <div class="label all">전체 재료</div>
+<<<<<<< HEAD
+=======
+                    <% for(let ingred of ingreds) { %>
+                        <% if(ingred.Status === 0) { %>
+                            <div>
+                                <%= ingred.Name %>
+                            </div>
+                        <% } %>
+                    <% } %>
+>>>>>>> 0684b3a15bdc908962e29321876e8e911b4c9b5f
                 </div>
             </div>
         </div>
         
         <!-- 오른쪽 영역(재료 등록)-->
         <div class="right-side">
+<<<<<<< HEAD
             <form class="register-form">
                 <label for="ingredient">등록하실 재료를 입력하세요:</label>
                 <!--등록하실 재료는 text 형식-->
@@ -39,6 +60,15 @@
                 <label for="expiry">유통기한을 입력하세요:</label>
                 <!--유통기한은 date 형식-->
                 <input type="date" id="expiry">
+=======
+            <form class="register-form" action="/add_ingred" method="POST">
+                <label for="ingredient">등록하실 재료를 입력하세요:</label>
+                <!--등록하실 재료는 text 형식-->
+                <input type="text" name="ingredient"  id="ingredient" placeholder="재료 이름">
+                <label for="expiry">유통기한을 입력하세요:</label>
+                <!--유통기한은 date 형식-->
+                <input type="date" name="expiry" id="expiry">
+>>>>>>> 0684b3a15bdc908962e29321876e8e911b4c9b5f
                 <button type="submit">등록</button>
             </form>
         </div>

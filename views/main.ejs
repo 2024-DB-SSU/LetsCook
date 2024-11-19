@@ -22,10 +22,30 @@
         <!--필수 재료 냉장고-->
         <div class="fridge-section top">
           <div class="label essential">필수 재료</div>
+<<<<<<< HEAD
+=======
+          <% for(let ingred of ingreds) { %>
+            <% if(ingred.Status === 1) { %>
+              <div class="button">
+                <%= ingred.Name %>
+              </div> 
+            <% } %>
+          <% } %>
+>>>>>>> 0684b3a15bdc908962e29321876e8e911b4c9b5f
         </div>
         <!--전체 재료 냉장고-->
         <div class="fridge-section bottom">
           <div class="label all">전체 재료</div>
+<<<<<<< HEAD
+=======
+          <% for(let ingred of ingreds) { %>
+            <% if(ingred.Status === 0) { %>
+              <div class="button">
+                <%= ingred.Name %>
+              </div>
+            <% } %>
+          <% } %>
+>>>>>>> 0684b3a15bdc908962e29321876e8e911b4c9b5f
         </div>
     </div>
   </div>
@@ -42,7 +62,11 @@
         <button onclick="navigate('레시피 보기')" class="button">레시피 보기</button>
     </div>
     <div class="large-button">
+<<<<<<< HEAD
         <a href="/recipe1" class="button large">레시피 추천</a>
+=======
+        <a href="/recommend" class="button large">레시피 추천</a>
+>>>>>>> 0684b3a15bdc908962e29321876e8e911b4c9b5f
     </div>
 </div>
 
