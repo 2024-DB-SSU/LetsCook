@@ -25,7 +25,7 @@ class Server {
         this.login_users[loggedInUser.ID] = new User(loggedInUser, User_ingreds);
         
       }
-
+      console.log(this.login_users)
       return {status : 200, error : 'No Error'}
     } catch (err) {
       console.error(err);

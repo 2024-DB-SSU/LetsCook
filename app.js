@@ -80,8 +80,8 @@ app.post('/log_in', async (req, res, next) => {
       if (!user) return res.status(401).json(info.message)
       req.logIn(user, (err)=>{
         if (err) return next(err)
-        server.login(req.user)
-        res.redirect('/main')    
+        server.login(req.user);
+        res.redirect('/main');
       })
     })(req, res, next)
   }
@@ -116,8 +116,7 @@ app.get('/log_out', (req, res, next) => {
 app.get('/main', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
-    let result = await server.get_ingreds(req.user.ID);
-    let ingreds = result.ingreds[0];
+    let ingreds = server.login_users[req.user.ID].Fridge.ingreds
     ingreds = await server.cal_remaining_days(ingreds);
     res.render('main.ejs', {ingreds : ingreds});
   } else {

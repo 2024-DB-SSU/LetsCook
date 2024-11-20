@@ -4,8 +4,8 @@ const server = require('../class/Server')
 router.get('', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
-    let result = await server.get_ingreds(req.user.ID)
-    let ingreds = result.ingreds[0]
+    let ingreds = server.login_users[req.user.ID].Fridge.ingreds
+    ingreds = await server.cal_remaining_days(ingreds);
     res.render('recipe1.ejs', {ingreds : ingreds})
   } else {
     // 로그인 상태가 아닐 경우
