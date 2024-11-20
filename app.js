@@ -80,9 +80,7 @@ app.post('/log_in', async (req, res, next) => {
       if (!user) return res.status(401).json(info.message)
       req.logIn(user, (err)=>{
         if (err) return next(err)
-        user = new User(req.user)
-        server.login_users[req.user.ID] = user
-        console.log(server.login_users)
+        server.login(req.user)
         res.redirect('/main')    
       })
     })(req, res, next)
@@ -102,9 +100,7 @@ app.get('/log_out', (req, res, next) => {
           return res.status(500).json({error : err});
         }
       })
-      server.login_users[user_ID] = null
-      delete server.login_users[user_ID]
-      console.log(server.login_users)
+      server.logout(user_ID)
       res.redirect('/'); // 로그아웃 후 리다이렉트
     });
   } else {
