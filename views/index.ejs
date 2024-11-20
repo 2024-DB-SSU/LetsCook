@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Let's Cook</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="/index.css">
     <!-- <script defer src="login-page.js"></script> -->
 </head>
 
@@ -21,12 +21,13 @@
                 <input type="password" name="PWD" class="form-field" placeholder="Password">
                 <button type="submit" id="login-form-submit">Login</button>
             </form>
-
+            
             <!-- 회원가입 폼 -->
             <form id="signup-form" action="/sign_in" method="POST">
                 <h2>Sign Up</h2>
                 <input type="text" name="ID" class="form-field" placeholder="ID">
                 <input type="password" name="PWD" class="form-field" placeholder="Password">
+                <input type="text", name="Name" class="form-field" placeholder="Name">
                 <input type="email" name="email" class="form-field" placeholder="Email">
                 <button type="submit" id="signup-form-submit">Sign up</button>
             </form>

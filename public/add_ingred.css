@@ -1,0 +1,185 @@
+/* 기본 스타일 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+header {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+h1 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    width: 80%;
+    height: 80vh;
+    margin-top: 50px;
+    gap: 30px;
+}
+
+/* 왼쪽: 냉장고 */
+.left-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+}
+
+.left-side h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.fridge {
+    width: 90%;
+    height: 75vh;
+    background-color: rgba(200, 200, 200, 0.5);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.fridge-section {
+    width: 100%;
+    height: 50%;
+    border-bottom: 2px solid #999;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 20px;
+}
+
+.fridge-section.top {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.fridge-section.bottom {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom: none;
+}
+
+.label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: #ddd;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.essential {
+    background-color: #ffcccb; /* 필수 재료 색상 */
+}
+
+.all {
+    background-color: #b3d9ff; /* 전체 재료 색상 */
+}
+
+/* 오른쪽: 재료 등록 폼 */
+.right-side {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #f0f0f0;
+    padding: 30px;
+    border-radius: 15px;
+}
+
+.register-form label {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.register-form input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.register-form button {
+    padding: 15px;
+    background-color: #bbb;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.register-form button:hover {
+    background-color: #999;
+}
+
+/* 뒤로가기 버튼 스타일 */
+footer {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+footer button {
+    background-color: #666;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+footer button:hover {
+    background-color: #444;
+}
+
+/* 뒤로가기 버튼 스타일 */
+footer {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.logout-button {
+    background-color: #666;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    border-radius: 10px;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #444;
+}

@@ -1,9 +1,8 @@
 
 class Fridge {
-  constructor(User_ID, Ingredients) {  
+  constructor(User_ID, ingreds) {  
     this.User_ID = User_ID;
-    this.Ingredients = Ingredients;
-
+    this.ingreds = ingreds;
   }
 
 }
