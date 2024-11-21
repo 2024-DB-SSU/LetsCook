@@ -36,7 +36,6 @@ router.post('/change_status', async(req, res) => {
 });
 
 
-// 개발 전임
 router.delete('/delete_ingred', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
