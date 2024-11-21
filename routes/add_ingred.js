@@ -24,7 +24,7 @@ router.post('', async(req, res) => {
   }
 });
 
-router.get('/change_status', async(req, res) => {
+router.post('/change_status', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
     await server.change_ingred_status(req.user.ID, req.query.ingred_name, req.query.ingred_status)
@@ -37,7 +37,7 @@ router.get('/change_status', async(req, res) => {
 
 
 // 개발 전임
-router.get('/delete_ingred', async(req, res) => {
+router.delete('/delete_ingred', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
     await server.delete_ingreds(req.user.ID, req.query.ingred_name)

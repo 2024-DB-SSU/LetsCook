@@ -24,7 +24,7 @@
           <div class="label essential">필수 재료</div>
           <% for(let ingred of ingreds) { %>
             <% if(ingred.Status === 1) { %>
-              <div class="button change_status" id="0">
+              <div class="button ingred" id="0">
                 <p><%= ingred.Name %></p>
                 <p><%= ingred.remainingDays %></p>
               </div> 
@@ -36,7 +36,7 @@
           <div class="label all">전체 재료</div>
           <% for(let ingred of ingreds) { %>
             <% if(ingred.Status === 0) { %>
-              <div class="button change_status" id="1">
+              <div class="button ingred" id="1">
                 <p><%= ingred.Name %></p>
                 <p><%= ingred.remainingDays %></p>
               </div> 
@@ -72,10 +72,10 @@
   <!-- ajax -->
   <script>
     // script안에서 ejs 문법 쓰려면 문자열로 써야함!
-    document.querySelectorAll('.change_status').forEach(function(button){
+    document.querySelectorAll('.ingred').forEach(function(button){
       button.addEventListener('click', function(){
         let ingred_name = button.querySelector('p').textContent
-        fetch(`/add_ingred/change_status?ingred_name=${ingred_name}&ingred_status=${Number(button.getAttribute('id'))}`, { method : 'GET' })
+        fetch(`/add_ingred/change_status?ingred_name=${ingred_name}&ingred_status=${Number(button.getAttribute('id'))}`, { method : 'POST' })
         .then((r)=>r.text())
         .then((r)=>{
           // 기존 태그와 새로운 부모 노드 선택
@@ -95,6 +95,19 @@
 
           // 요소를 새로운 부모에 추가
           newParent.appendChild(elementToMove);
+        })
+      })
+    })
+
+    document.querySelectorAll('.ingred').forEach(function(button){
+      button.addEventListener('contextmenu', function(){
+        event.preventDefault();
+        let ingred_name = button.querySelector('p').textContent
+        fetch(`/add_ingred/delete_ingred?ingred_name=${ingred_name}`, { method : 'DELETE' })
+        .then((r)=>r.text())
+        .then((r)=>{
+          // 기존 태그와 새로운 부모 노드 선택
+          button.style.display = 'none'
         })
       })
     })

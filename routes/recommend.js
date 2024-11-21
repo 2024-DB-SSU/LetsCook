@@ -2,6 +2,8 @@ const router = require('express').Router()
 const axios = require('axios');
 const server = require('../class/Server')
 
+
+// 프롬프트 입력 페이지
 router.get('', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
@@ -14,6 +16,8 @@ router.get('', async(req, res) => {
   }
 });
 
+
+// 추천받은 레시피 보여주는 페이지
 router.post('/done', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
@@ -41,6 +45,8 @@ router.post('/done', async(req, res) => {
   }
 });
 
+
+// 개별 레시피 페이지
 router.get('/recipe', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
@@ -51,6 +57,8 @@ router.get('/recipe', async(req, res) => {
   }
 });
 
+
+// 이전 검색 레시피 페이지
 router.get('/previous', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
