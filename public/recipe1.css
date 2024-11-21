@@ -95,10 +95,9 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center; /* 전체 영역 중앙 정렬 */
     padding: 20px;
-    gap: 80px; /* 간격 추가로 아래로 이동 */
-    margin-top: 120px; /* 중앙으로 더 내려오도록 조정 */
+    gap: 30px; /* 입력 필드와 버튼 간격 조정 */
 }
 
 .status-input {
@@ -120,26 +119,24 @@ h1 {
 
 /* 레시피 추천 버튼 */
 .large-button {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.large-button a {
     display: inline-block;
-    width: 250px; /* 네모 형태 너비 */
-    height: 80px; /* 네모 형태 높이 */
+    width: 250px; /* 버튼 너비 */
+    height: 80px; /* 버튼 높이 */
     background-color: #ccc;
+    border: none;
     border-radius: 15px;
     text-align: center;
-    line-height: 80px; /* 버튼 텍스트 수직 중앙 정렬 */
     font-size: 1.2rem;
-    text-decoration: none;
     color: black;
+    cursor: pointer;
     transition: background-color 0.3s;
+    line-height: 80px; /* 버튼 텍스트 수직 정렬 */
+    margin-top: 20px; /* "오늘의 기분 입력" 필드와 간격 추가 */
+    position: relative;
+    left: 70px;
 }
 
-.large-button a:hover {
+.large-button:hover {
     background-color: #aaa;
 }
 

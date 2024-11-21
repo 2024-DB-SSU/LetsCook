@@ -23,8 +23,23 @@
 
         <!-- 내용이 들어갈 수 있는 큰 박스 -->
         <div class="content-box">
-            <p>1. 계란말이</p>
-            <p>요약 :</p>
+            <!--레시피 카드-->
+            <div class="recipe-card">
+                <!--요리명-->
+                <div class="recipe-title">
+                    <p>
+                        <span class="title-label">요리명 : </span>
+                        <span class="recipe-name-box"></span>
+                    </p>
+                    <button class="like-button">좋아요</button>
+                </div>
+                <!--재료 및 과정-->
+                <div class="recipe-details">
+                    <p>재료 : <span class="recipe-ingredient"></span></p>
+                    <p>과정 : <span class="recipe-process"></span></p>
+                </div>
+            </div>
+            <!--추가 카드가 생길 경우 반복-->
         </div>
     </div>
 
