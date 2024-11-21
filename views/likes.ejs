@@ -9,22 +9,36 @@
 </head>
 
 <body>
-    <!-- 상단 제목 -->
+    <!-- 좌상단 제목 -->
     <header>
         <h1 id="page-title">Let's Cook</h1>
     </header>
 
+    <!-- 메인 컨테이너 -->
     <div class="container">
-        <!-- 왼쪽 박스 -->
-        <div class="left-box">
-            <h2>흑백이 추천 레시피</h2>
-            <p class="pagination">1 2 3 4 5 ...</p>
+        <!-- 내가 좋아요 누른 레시피 제목 -->
+        <div class="title-box">
+            <h2>내가 좋아요한 레시피</h2>
         </div>
 
-        <!-- 오른쪽 박스 -->
-        <div class="right-box">
-            <h2>내가 좋아하는 레시피</h2>
-            <p class="pagination">1 2 3 4 5 ...</p>
+        <!-- 내용이 들어갈 수 있는 큰 박스 -->
+        <div class="content-box">
+            <!--레시피 카드-->
+            <div class="recipe-card">
+                <!--요리명-->
+                <div class="recipe-title">
+                    <p>
+                        <span class="title-label">요리명 : </span>
+                        <span class="recipe-name-box"></span>
+                    </p>
+                </div>
+                <!--재료 및 과정-->
+                <div class="recipe-details">
+                    <p>재료 : <span class="recipe-ingredient"></span></p>
+                    <p>과정 : <span class="recipe-process"></span></p>
+                </div>
+            </div>
+            <!--추가 카드가 생길 경우 반복-->
         </div>
     </div>
 
