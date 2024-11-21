@@ -113,9 +113,16 @@ class Server {
   async add_ingreds(User_ID, ingred, expiry){
     try {
       const query = 'INSERT INTO Ingredient (User_ID, Name, Expiration) VALUES (?, ?, ?)';
-        const values = [User_ID, ingred, expiry];
-        await db.execute(query, values);
-        return {status : 200, error : 'No Error'}
+      const values = [User_ID, ingred, expiry];
+      await db.execute(query, values);
+      let new_ingred = {
+        Name : ingred,
+        Expiration : new Date(expiry),
+        Status : 0,
+        User_ID : User_ID
+      }
+      this.login_users[User_ID].Fridge.ingreds.push(new_ingred)
+      return {status : 200, error : 'No Error'}
     } catch (err) {
       console.error(err);
       return {status : 500, error : 'Database query failed'}
@@ -125,9 +132,12 @@ class Server {
   async change_ingred_status(User_ID, ingred_name, ingred_status){
     try {
       const query = 'UPDATE Ingredient SET Status = ? WHERE User_ID = ? AND Name = ?';
-        const values = [ingred_status, User_ID, ingred_name];
-        await db.execute(query, values);
-        return {status : 200, error : 'No Error'}
+      const values = [ingred_status, User_ID, ingred_name];
+      await db.execute(query, values);
+      let target = this.login_users[User_ID].Fridge.ingreds.find(item => item.Name === ingred_name);
+      if (target) { target.Status = Number(ingred_status); } 
+
+      return {status : 200, error : 'No Error'}
     } catch (err) {
       console.error(err);
       return {status : 500, error : 'Database query failed'}

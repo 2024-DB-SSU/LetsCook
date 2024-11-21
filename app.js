@@ -118,6 +118,9 @@ app.get('/main', async(req, res) => {
     // 로그인 상태일 경우
     let ingreds = server.login_users[req.user.ID].Fridge.ingreds
     ingreds = await server.cal_remaining_days(ingreds);
+
+    console.log(server.login_users.user1.Fridge.ingreds)
+    
     res.render('main.ejs', {ingreds : ingreds});
   } else {
     // 로그인 상태가 아닐 경우
