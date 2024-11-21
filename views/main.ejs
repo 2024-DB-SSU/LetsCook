@@ -24,9 +24,9 @@
           <div class="label essential">필수 재료</div>
           <% for(let ingred of ingreds) { %>
             <% if(ingred.Status === 1) { %>
-              <div class="button">
-                <%= ingred.Name %>
-                <%= ingred.remainingDays %>
+              <div class="button change_status" id="0">
+                <p><%= ingred.Name %></p>
+                <p><%= ingred.remainingDays %></p>
               </div> 
             <% } %>
           <% } %>
@@ -36,10 +36,10 @@
           <div class="label all">전체 재료</div>
           <% for(let ingred of ingreds) { %>
             <% if(ingred.Status === 0) { %>
-              <div class="button">
-                <%= ingred.Name %>
-                <%= ingred.remainingDays %>
-              </div>
+              <div class="button change_status" id="1">
+                <p><%= ingred.Name %></p>
+                <p><%= ingred.remainingDays %></p>
+              </div> 
             <% } %>
           <% } %>
         </div>
@@ -68,5 +68,37 @@
     <a href="/log_out" class="logout-button">로그아웃</a>
   </footer>
 
+
+  <!-- ajax -->
+  <script>
+    // script안에서 ejs 문법 쓰려면 문자열로 써야함!
+    document.querySelectorAll('.change_status').forEach(function(button){
+      button.addEventListener('click', function(){
+        let ingred_name = button.querySelector('p').textContent
+        fetch(`/add_ingred/change_status?ingred_name=${ingred_name}&ingred_status=${Number(button.getAttribute('id'))}`, { method : 'GET' })
+        .then((r)=>r.text())
+        .then((r)=>{
+          // 기존 태그와 새로운 부모 노드 선택
+          const elementToMove = button; 
+          let txt = null;
+
+          if(Number(button.getAttribute('id')) === 1) {
+            txt = ".top";
+            button.setAttribute('id','0')
+          }
+          else{
+            txt = ".bottom"
+            button.setAttribute('id','1')
+          }
+          const newParent = document.querySelector(txt);
+          console.log(newParent)
+
+          // 요소를 새로운 부모에 추가
+          newParent.appendChild(elementToMove);
+        })
+      })
+    })
+      
+  </script>
 </body>
 </html>

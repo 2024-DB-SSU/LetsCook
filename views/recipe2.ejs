@@ -15,31 +15,86 @@
     </header>
 
     <div class="container">
-        <!--왼쪽 추천 박스-->
+        <!-- 왼쪽 추천 리스트 박스 -->
         <div class="left-box">
-            <p>추천 레시피 1</p>
-            <span class="like-button"></span>
-        </div>
-        <div class="recommned-item">
-            <p>추천 레시피 2</p>
-            <span class="like-button"></span>
-        </div>
-        <div class="recommned-item">
-            <p>추천 레시피 3</p>
-            <span class="like-button"></span>
-        </div>
-    </div>
+            <div class="recommend-item" data-id="1">
+                <div class="title-row">
+                    <h3>추천 1:</h3>
+                    <p>요리명 1</p>
+                </div>
+                <div class="content-row">
+                    <div class="nutrition-info">
+                        <p>영양 정보</p>
+                        <p>열량: <span class="INFO_ENG">sample</span></p>
+                        <p>단백질: <span class="INFO_PRO">sample</span></p>
+                        <p>지방: <span class="INFO_FAT">sample</span></p>
+                        <p>탄수화물: <span class="INFO_CAR">sample</span></p>
+                    </div>
+                    <div class="image-box"></div>
+                </div>
+            </div>
 
-    <!--오른쪽 레시피 상세 박스-->
-    <div class="right-box">
-        <h2>계란말이</h2>
-        <p>여기에 상세 레시피 내용 표시</p>
+            <div class="recommend-item" data-id="2">
+                <div class="title-row">
+                    <h3>추천 2:</h3>
+                    <p>요리명 2</p>
+                </div>
+                <div class="content-row">
+                    <div class="nutrition-info">
+                        <p>영양 정보</p>
+                        <p>열량: <span class="INFO_ENG">sample</span></p>
+                        <p>단백질: <span class="INFO_PRO">sample</span></p>
+                        <p>지방: <span class="INFO_FAT">sample</span></p>
+                        <p>탄수화물: <span class="INFO_CAR">sample</span></p>
+                    </div>
+                    <div class="image-box"></div>
+                </div>
+            </div>
+
+            <div class="recommend-item" data-id="3">
+                <div class="title-row">
+                    <h3>추천 3:</h3>
+                    <p>요리명 3</p>
+                </div>
+                <div class="content-row">
+                    <div class="nutrition-info">
+                        <p>영양 정보</p>
+                        <p>열량: <span class="INFO_ENG">sample</span></p>
+                        <p>단백질: <span class="INFO_PRO">sample</span></p>
+                        <p>지방: <span class="INFO_FAT">sample</span></p>
+                        <p>탄수화물: <span class="INFO_CAR">sample</span></p>
+                    </div>
+                    <div class="image-box"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 오른쪽 상세 정보 박스 -->
+        <div class="right-box hidden">
+            <h2 id="recipe-title">요리명</h2>
+            <div class="ingredients-box">
+                <p>재료:</p>
+                <div id="ingredients-list" class="ingredients-list">
+                    <!--동적 데이터-->
+                </div>
+            </div>
+            <div class="process-box">
+                <p>과정:</p>
+                <div id="process-content" class="scrollable-content">
+                    <!--동적 데이터-->
+                </div>
+            </div>
+            <button class="like-button">좋아요</button>
+        </div>
     </div>
 
     <!-- 뒤로가기 버튼 -->
     <footer>
         <a href="/recommend" class="back-button">뒤로가기</a>
     </footer>
+
+    <script src="recipe2.js"></script>
+
 </body>
 
 </html>
