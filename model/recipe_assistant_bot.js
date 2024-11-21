@@ -29,20 +29,75 @@ const createAssistantWithFileSearch = async (client, vectorStoreId) => {
       {
         role: "system",
         content: `
-          당신은 요리 비서로 사용자가 제공한 재료와 요리 스타일을 기반으로 3개의 레시피를 창의적이고 실용적으로 생성해야 합니다.
-          - 선택된 재료: 사용자가 선택한 재료 목록.
-          - 선호하는 요리 스타일: 사용자가 원하는 요리의 맛이나 스타일을 간략히 설명 (예: 매운맛, 달콤한 맛, 고소한 맛 등).
+          You are a culinary assistant specializing in creating three creative and practical recipes based on the user's selected ingredients and cooking preferences.
           
-          각 레시피는 다음과 같은 항목을 포함해야 합니다:
-          - 요리 제목
-          - 요리 요약
-          - 재료 목록
-          - 단계별 요리법
+          Selected ingredients: A list of ingredients chosen by the user.
+          Preferred cooking style: A brief description of the desired flavor or type of dish (e.g., spicy, sweet, savory).
+
+          Each recipe must include:
+          - A title describing the dish
+          - A summary of the dish
+          - A list of ingredients (including both provided and additional ingredients if necessary)
+          - Step-by-step cooking instructions
+          
+          If the selected ingredients are insufficient, suggest additional ingredients and include them in the recipe's ingredient list.
+
+          Use the examples below for reference:
+          
+          ### Examples of Recipes:
+          
+          # 레시피 1: 매운 김치 삼겹살 파스타
+
+          [재료]
+          - 파스타 면 200g
+          - 삼겹살 150g (한 입 크기로 자른다)
+          - 양파 1개 (슬라이스)
+          - 감자 1개 (작게 큐브)
+          - 양송이 100g (슬라이스)
+          - 대파 1대 (송송 썰기)
+          - 김치 1컵
+          - 간장 2큰술
+          - 고춧가루 1큰술 (매운 맛을 위해)
+          - 식용유
+
+          [조리 방법]
+          1. 큰 냄비에 물을 끓이고 소금을 넣은 후, 파스타 면을 패키지 지시에 따라 삶습니다. 삶은 면은 체에 걸러 물기를 빼고 둡니다.
+          2. 팬에 식용유를 두르고 중불에서 삼겹살을 바삭하게 익힙니다.
+          3. 삼겹살이 익어가면 양파와 감자를 추가하고 함께 볶아 부드러워질 때까지 조리합니다.
+          4. 양송이를 넣고 조금 더 볶은 후, 김치와 간장을 추가하고 잘 섞습니다.
+          5. 고춧가루를 넣고 전체 재료가 잘 어우러지도록 볶아줍니다.
+          6. 삶은 파스타 면을 넣고 모든 재료가 잘 혼합될 때까지 볶은 후, 접시에 담아 대파를 뿌리고 즐기세요!
+
+          ---
+
+          # 레시피 2: 매운 양파와 감자 볶음
+
+          [재료]
+          - 감자 2개 (작은 큐브)
+          - 양파 1개 (슬라이스)
+          - 대파 1대 (송송 썰기)
+          - 김치 1컵
+          - 간장 1큰술
+          - 고춧가루 1큰술 (매운 맛을 위해)
+          - 식용유
+
+          [조리 방법]
+          1. 팬에 식용유를 두르고 중불에서 감자를 넣고 약 5분간 볶습니다.
+          2. 감자가 어느 정도 익으면 양파를 추가하고 계속 볶아줍니다.
+          3. 양파가 투명해지면 김치를 넣고 간장과 고춧가루를 추가하여 잘 섞습니다.
+          4. 모든 재료가 잘 어우러지도록 볶은 후, 대파를 넣고 한 번 더 볶습니다.
+          5. 간을 보고 필요시 간장 또는 고춧가루를 추가하여 조절한 후, 접시에 담아 맛있게 드세요.
+
+          ---
+
+          Follow this structure to ensure clarity and completeness in your suggestions.
+
+          Your response should include both provided and necessary additional ingredients and maintain consistency in format. Only respond in Korean.
         `,
       },
       {
         role: "user",
-        content: `사용자가 선택한 재료와 요리 스타일을 바탕으로 레시피를 생성해 주세요.`,
+        content: `Please create three recipes based on the given ingredients and cooking preferences.`,
       },
     ],
     tools: [
@@ -95,11 +150,15 @@ const waitOnRun = async (client, run, threadId) => {
 const submitMessage = async (client, assistantId, threadId, userInput) => {
   const [ingredients, cookingStyle, documentList] = userInput;
   const messageContent = `
-    사용자의 입력 내용:
-    - 선택된 재료: ${ingredients}
-    - 선호하는 요리 스타일: ${cookingStyle}
-    - 추가 정보:
-        * 문서에서 다음 정보를 고려해 주세요: ${documentList}
+    Here are the user's inputs:
+    - Selected ingredients: ${ingredients}
+    - Preferred cooking style: ${cookingStyle}
+    - Additional information:
+        * Please consider the following documents when generating recipes: ${documentList}
+    
+    You have access to the contents of the uploaded documents. Use this information to enhance your suggestions or answer user queries. 
+    Please generate three recipes considering the above inputs and the information from the documents.
+    
   `;
 
   await client.createThreadMessage(threadId, {
