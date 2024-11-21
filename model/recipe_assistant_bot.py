@@ -147,11 +147,8 @@ def submit_message(client, assistant_id, thread_id, user_input):
     Here are the user's inputs:
     - Selected ingredients: {ingredients}
     - Preferred cooking style: {cooking_style}
-    - Additional information:
-        * Please consider the following documents when generating recipes: {document_list}
-
-    You have access to the contents of the uploaded documents. Use this information to enhance your suggestions or answer user queries. 
-    Please generate three recipes considering the above inputs and the information from the documents.
+    
+    Please generate three recipes considering the above inputs.
     """
     client.beta.threads.messages.create(
         thread_id=thread_id,
