@@ -1,8 +1,36 @@
 const db = require('../db');
+const User = require('./User');
 
 class Server {
   constructor() {  
-    
+    this.login_users = {};
+  }
+
+  async init(){
+    try {
+      const [rows] = await db.execute(`SELECT data FROM sessions WHERE expires > UNIX_TIMESTAMP(NOW());`);
+      const loggedInUsers = rows.map(row => {
+        try {
+          const sessionData = JSON.parse(row.data); // JSON 파싱
+          return sessionData.passport?.user || null; // 사용자 ID 추출
+        } catch (err) {
+          console.error('Error parsing session data:', err);
+          return null;
+        }
+      }).filter(userId => userId !== null);
+
+      for(const loggedInUser of loggedInUsers){
+        let User_ingreds = await this.get_ingreds(loggedInUser.ID);
+        User_ingreds = User_ingreds.ingreds[0]
+        this.login_users[loggedInUser.ID] = new User(loggedInUser, User_ingreds);
+        
+      }
+      console.log(this.login_users)
+      return {status : 200, error : 'No Error'}
+    } catch (err) {
+      console.error(err);
+      return {status : 500, error : 'Database query failed'}
+    }
   }
 
   async signin_verification(ID){
@@ -35,6 +63,18 @@ class Server {
       return {status : 409, error : '이미 존재하는 아이디'}
     }
     
+  }
+
+  async login(User_info){
+    let User_ingreds = await server.get_ingreds(User_info.ID);
+    User_ingreds = User_ingreds.ingreds[0];
+    const user = new User(User_info, User_ingreds)
+    this.login_users[User_info.ID] = user
+  }
+
+  async logout(ID){
+    this.login_users[ID] = null
+    delete server.login_users[ID]
   }
 
   async get_user_list(){
@@ -73,9 +113,16 @@ class Server {
   async add_ingreds(User_ID, ingred, expiry){
     try {
       const query = 'INSERT INTO Ingredient (User_ID, Name, Expiration) VALUES (?, ?, ?)';
-        const values = [User_ID, ingred, expiry];
-        await db.execute(query, values);
-        return {status : 200, error : 'No Error'}
+      const values = [User_ID, ingred, expiry];
+      await db.execute(query, values);
+      let new_ingred = {
+        Name : ingred,
+        Expiration : new Date(expiry),
+        Status : 0,
+        User_ID : User_ID
+      }
+      this.login_users[User_ID].Fridge.ingreds.push(new_ingred)
+      return {status : 200, error : 'No Error'}
     } catch (err) {
       console.error(err);
       return {status : 500, error : 'Database query failed'}
@@ -85,9 +132,12 @@ class Server {
   async change_ingred_status(User_ID, ingred_name, ingred_status){
     try {
       const query = 'UPDATE Ingredient SET Status = ? WHERE User_ID = ? AND Name = ?';
-        const values = [ingred_status, User_ID, ingred_name];
-        await db.execute(query, values);
-        return {status : 200, error : 'No Error'}
+      const values = [ingred_status, User_ID, ingred_name];
+      await db.execute(query, values);
+      let target = this.login_users[User_ID].Fridge.ingreds.find(item => item.Name === ingred_name);
+      if (target) { target.Status = Number(ingred_status); } 
+
+      return {status : 200, error : 'No Error'}
     } catch (err) {
       console.error(err);
       return {status : 500, error : 'Database query failed'}
@@ -106,4 +156,5 @@ class Server {
 
 
 const server = new Server()
+server.init()
 module.exports = server;  

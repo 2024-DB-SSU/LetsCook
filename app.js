@@ -77,15 +77,17 @@ app.post("/log_in", async (req, res, next) => {
       if (!user) return res.status(401).json(info.message);
       req.logIn(user, (err) => {
         if (err) return next(err);
+        server.login(req.user);
         res.redirect("/main");
       });
     })(req, res, next);
   }
 });
 
-app.get("/log_out", (req, res) => {
+app.get("/log_out", (req, res, next) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
+    let user_ID = req.user.ID;
     req.logout((err) => {
       if (err) {
         return next(err); // 에러가 있을 경우 처리
@@ -95,6 +97,7 @@ app.get("/log_out", (req, res) => {
           return res.status(500).json({ error: err });
         }
       });
+      server.logout(user_ID);
       res.redirect("/"); // 로그아웃 후 리다이렉트
     });
   } else {
@@ -108,9 +111,11 @@ app.get("/log_out", (req, res) => {
 app.get("/main", async (req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
-    let result = await server.get_ingreds(req.user.ID);
-    let ingreds = result.ingreds[0];
+    let ingreds = server.login_users[req.user.ID].Fridge.ingreds;
     ingreds = await server.cal_remaining_days(ingreds);
+
+    console.log(server.login_users.user1.Fridge.ingreds);
+
     res.render("main.ejs", { ingreds: ingreds });
   } else {
     // 로그인 상태가 아닐 경우
