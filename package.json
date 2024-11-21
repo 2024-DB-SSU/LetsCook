@@ -11,11 +11,13 @@
   "description": "",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
     "express-mysql-session": "^3.0.3",
     "express-session": "^1.18.1",
     "mysql2": "^3.11.4",
+    "openai": "^3.2.1",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0"
   }
