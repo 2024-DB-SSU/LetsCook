@@ -37,10 +37,10 @@ router.get('/change_status', async(req, res) => {
 
 
 // 개발 전임
-router.post('/delete_ingred', async(req, res) => {
+router.get('/delete_ingred', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
-    
+    await server.delete_ingreds(req.user.ID, req.query.ingred_name)
     res.redirect('/add_ingred')
   } else {
     // 로그인 상태가 아닐 경우

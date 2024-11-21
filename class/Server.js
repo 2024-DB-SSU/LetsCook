@@ -129,6 +129,19 @@ class Server {
     }
   }
 
+  async delete_ingreds(User_ID, ingred){
+    try {
+      const query = 'DELETE FROM Ingredient WHERE Name = ? AND User_ID = ?';
+      const values = [ingred, User_ID];
+      await db.execute(query, values);
+      this.login_users[User_ID].Fridge.ingreds = this.login_users[User_ID].Fridge.ingreds.filter(item => item.Name !== ingred);
+      return {status : 200, error : 'No Error'}
+    } catch (err) {
+      console.error(err);
+      return {status : 500, error : 'Database query failed'}
+    }
+  }
+
   async change_ingred_status(User_ID, ingred_name, ingred_status){
     try {
       const query = 'UPDATE Ingredient SET Status = ? WHERE User_ID = ? AND Name = ?';
