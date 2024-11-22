@@ -23,21 +23,27 @@
 
         <!-- 내용이 들어갈 수 있는 큰 박스 -->
         <div class="content-box">
-            <% for(const recipe of recipes){ %>
+            <% for(let i = 0; i < recipes.length; i++ ){ %>
             <!--레시피 카드-->
-            <div class="recipe-card">
+            <div class="recipe-card" id="card<%= i %>">
                 <!--요리명-->
                 <div class="recipe-title">
                     <p>
                         <span class="title-label">요리명 : </span>
-                        <span class="recipe-name-box"><%= recipe.Name %></span>
+                        <span class="recipe-name-box" id="title<%= i %>"><%= recipes[i].Name %></span>
+                        <span style="display:None;" id="date<%= i %>"><%= recipes[i].Recommend_Date %></span>
+                        <span style="display:None;" id="status<%= i %>"><%= recipes[i].Like %></span>
                     </p>
-                    <button class="like-button">좋아요</button>
+                    <% if(recipes[i].Like === 0){ %>
+                    <button class="like-button" id="like<%= i %>">좋아요</button>
+                    <% } else { %>
+                    <button class="like-button" id="like<%= i %>">좋아요 취소</button>
+                    <% } %>
                 </div>
                 <!--재료 및 과정-->
                 <div class="recipe-details">
-                    <p>재료 : <span class="recipe-ingredient"><%= recipe.Ingredients %></span></p>
-                    <p>과정 : <span class="recipe-process"><%= recipe.Process %></span></p>
+                    <p>재료 : <span class="recipe-ingredient"><%= recipes[i].Ingredients %></span></p>
+                    <p>과정 : <span class="recipe-process"><%= recipes[i].Process %></span></p>
                 </div>
             </div>
             <!--추가 카드가 생길 경우 반복-->
@@ -86,6 +92,30 @@
             })
         }
 
+
+        // ajax
+        const like_buttons = document.querySelectorAll('.like-button')
+        like_buttons.forEach(like_button=>{
+            like_button.addEventListener('click', function(){
+                const recipe_num = like_button.getAttribute('id').replace('like', '')
+                const Name = document.getElementById('title'+recipe_num).innerText
+                const Date = document.getElementById('date'+recipe_num).innerText
+                const Status = document.getElementById('status'+recipe_num).innerText
+                fetch(`/recommend/like?Name=${Name}&Date=${Date}&Status=${Status}`, { method : 'POST' })
+                .then((r)=>r.text())
+                .then((r)=>{
+                    const Status_tag = document.getElementById('status'+recipe_num)
+                    if(Status==='0'){
+                        Status_tag.innerText = '1'
+                        like_button.innerText = "좋아요 취소"
+                    }
+                    else if(Status==='1'){
+                        Status_tag.innerText = '0'
+                        like_button.innerText = "좋아요"
+                    }
+                    })
+            })
+        })
         
     </script>
 </body>

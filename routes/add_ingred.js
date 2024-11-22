@@ -13,6 +13,7 @@ router.get('', async(req, res) => {
   }
 });
 
+
 router.post('', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
@@ -23,6 +24,7 @@ router.post('', async(req, res) => {
     res.redirect('/')
   }
 });
+
 
 router.post('/change_status', async(req, res) => {
   if (req.isAuthenticated()) {

@@ -47,7 +47,7 @@ router.post('/done', async(req, res) => {
 });
 
 
-// 개별 레시피 페이지
+// 개별 레시피 페이지 -> 필요 없어짐
 router.get('/recipe', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
@@ -66,12 +66,13 @@ router.get('/previous', async(req, res) => {
     let result = await server.get_previous_recipes(req.user.ID)
     console.log(result.previous_recipes[0])
     let recipes = result.previous_recipes[0]
-    res.render('recommend_previous.ejs', {recipes : recipes})
+    res.render('recommend_previous.ejs', {recipes : recipes, User_ID : req.user.ID})
   } else {
     // 로그인 상태가 아닐 경우
     res.redirect('/')
   }
 });
+
 
 // 선택한 레시피 저장
 router.post('/select', async(req, res) => {
@@ -86,6 +87,19 @@ router.post('/select', async(req, res) => {
     console.log(process)
     await server.select_recipe(req.user.ID, {title:req.query.title, ingreds:ingreds, process:process})
     res.redirect('/recommend')
+  } else {
+    // 로그인 상태가 아닐 경우
+    res.redirect('/')
+  }
+});
+
+
+// 이전 레시피에서 좋아요 누름
+router.post('/like', async(req, res) => {
+  if (req.isAuthenticated()) {
+    // 로그인 상태일 경우
+    await server.like_recipe(req.user.ID, {Name:req.query.Name, Date:req.query.Date, Status:req.query.Status})
+    res.redirect('/recommend/previous')
   } else {
     // 로그인 상태가 아닐 경우
     res.redirect('/')

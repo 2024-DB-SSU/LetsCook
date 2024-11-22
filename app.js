@@ -33,11 +33,14 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// 서버 띄우기
 app.listen(8080, () => {
   console.log("http://localhost:8080 에서 실행 중입니다.");
 });
 // ======================================================================
 // ======================================================================
+
+
 
 // =============== 첫 페이지 ===============
 app.get("/", async (req, res) => {
@@ -50,6 +53,8 @@ app.get("/", async (req, res) => {
   }
 });
 // =======================================
+
+
 
 // =============== 회원가입/로그인/로그아웃 ===============
 app.post("/sign_in", async (req, res) => {
@@ -107,6 +112,8 @@ app.get("/log_out", (req, res, next) => {
 });
 // ==================================================
 
+
+
 // =============== 메인 페이지 ===============
 app.get("/main", async (req, res) => {
   if (req.isAuthenticated()) {
@@ -121,29 +128,34 @@ app.get("/main", async (req, res) => {
 });
 // ========================================
 
+
+
 // =============== 재료 등록 페이지 ===============
 app.use("/add_ingred", require("./routes/add_ingred.js"));
 // ========================================
+
+
 
 // =============== 레시피 추천 페이지 ===============
 app.use("/recommend", require("./routes/recommend.js"));
 // =============================================
 
+
+
 // ================ 좋아요 ====================
 app.get("/likes", async (req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
-    res.render("likes.ejs");
+    let recipes = await server.get_previous_recipes(req.user.ID);
+    recipes = recipes.previous_recipes[0]
+    // Like가 1인 항목만 필터링
+    const likedRecipes = recipes.filter(recipe => recipe.Like === 1);
+    console.log(likedRecipes)
+    res.render("likes.ejs", {likedRecipes : likedRecipes});
   } else {
     // 로그인 상태가 아닐 경우
     res.redirect("/");
   }
 });
 // ==========================================
-
-
-
-
-
-
 
