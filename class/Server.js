@@ -165,7 +165,21 @@ class Server {
     }
     return ingreds;
   }
+
+  async select_recipe(User_ID, ingred_info){
+    try {
+      const query = 'INSERT INTO Recommended_recipe (Name, Ingredients, Process, User_ID) VALUES (?, ?, ?, ?)';
+      const values = [ingred_info.title, ingred_info.ingreds, ingred_info.process, User_ID];
+      await db.execute(query, values);
+      return {status : 200, error : 'No Error'}
+    } catch (err) {
+      console.error(err);
+      return {status : 500, error : 'Database query failed'}
+    }
+  }
 }
+
+
 
 
 const server = new Server()

@@ -117,6 +117,33 @@
                 }
             })
         })
+    
+        // ajax
+        const like_button = document.querySelector('.like-button')
+        like_button.addEventListener('click', function(){
+            const title = document.getElementById("recipe-title").innerText;
+            const ingreds = document.getElementById("ingredients-box-content").innerText;
+            const process = document.getElementById("process-content").innerText;
+            console.log(title)
+            console.log(ingreds)
+            console.log(process)
+            fetch(`/recommend/select?title=${title}&ingreds=${ingreds}&process=${process}`, { method : 'POST' })
+            .then((r)=>r.text())
+            .then((r)=>{
+                like_button.innerText = "선택했음"
+                // 좋아요 버튼 또 누르지 못하도록 이벤트리스너 제거
+                const selected = like_button.cloneNode(true);
+                like_button.replaceWith(selected);
+                
+                // 다른 레시피 클릭 못하도록 이벤트리스너 제거
+                document.querySelectorAll('.recommend-item').forEach(function(item){
+                    // 버튼 복제 및 리스너 제거
+                    const newItem = item.cloneNode(true);
+                    item.replaceWith(newItem);
+                })
+            })
+        })
+    
     </script>
 
 </body>

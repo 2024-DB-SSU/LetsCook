@@ -70,4 +70,19 @@ router.get('/previous', async(req, res) => {
   }
 });
 
+// 선택한 레시피 저장
+router.post('/select', async(req, res) => {
+  if (req.isAuthenticated()) {
+    // 로그인 상태일 경우
+    console.log(req.query.title)
+    console.log(req.query.ingreds)
+    console.log(req.query.process)
+    await server.select_recipe(req.user.ID, {title:req.query.title, ingreds:req.query.ingreds, process:req.query.process})
+    res.redirect('/recommend')
+  } else {
+    // 로그인 상태가 아닐 경우
+    res.redirect('/')
+  }
+});
+
 module.exports = router
