@@ -4,4 +4,3 @@ model/.env
 .env
 *.log
 model/__pycache__
-
