@@ -26,15 +26,16 @@ router.post('/done', async(req, res) => {
     let essential = ingreds.filter(ingredient => ingredient.Status === 1).map(ingredient => ingredient.Name);
     let basic = ingreds.filter(ingredient => ingredient.Status === 0).map(ingredient => ingredient.Name);
     let prompt = req.body.prompt
-    const data = { 
+    const user_input = { 
       essential: essential.join(', '),
       basic: basic.join(', '),
       prompt: prompt
     };
     try {
-      const response = await axios.post('http://localhost:5000/api/data', data);
-      console.log("Response from Python:", response.data);
-      res.render('recipe2.ejs')
+      const response = await axios.post('http://localhost:5000/api/data', user_input);
+      const recipes = JSON.parse(response.data);
+      console.log(recipes.recipe1);
+      res.render('recipe2.ejs', { recipes : recipes })
     } catch (error) {
         console.error("Error:", error);
         res.status(500).send("Error communicating with Python");

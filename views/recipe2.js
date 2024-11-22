@@ -89,8 +89,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     recommendItems.forEach(item => {
         item.addEventListener("click", () => {
+            console.log(item.dataset)
             const recipeId = parseInt(item.dataset.id, 10); // 클릭한 요소의 id 추출
             const selectedRecipe = recipeDataList.find(recipe => recipe.id === recipeId); // id에 해당하는 데이터 찾기
+            console.log(recipeId)
+            console.log(selectedRecipe)
             if (selectedRecipe) {
                 displayRecipe(selectedRecipe); // 데이터 표시
             }

@@ -7,7 +7,7 @@ import time
 
 def initialize_client():
     load_dotenv()
-    api_key = os.environ.get("OpenAI_API_KEY")
+    api_key = os.environ.get("OPENAI_API_KEY")
     if not api_key:
         raise ValueError("API 키가 설정되지 않았습니다.")
     return OpenAI(api_key=api_key)
@@ -223,7 +223,7 @@ def ask(client, assistant_id, thread_id, user_inputs):
         return None
 
 
-def main():
+def recommend():
     client = initialize_client()
 
     # Vector store 생성
@@ -244,9 +244,10 @@ def main():
 
     # Assistant 호출
     results = ask(client, assistant_id, thread_id, user_inputs)
-    with open("model_response.json", "w", encoding="utf-8") as json_file:
-        json.dump(results, json_file, ensure_ascii=False, indent=4)
+    # with open("model_response.json", "w", encoding="utf-8") as json_file:
+    #     json.dump(results, json_file, ensure_ascii=False, indent=4)
+    return results
     
 
 if __name__ == "__main__":
-    main()
+    recommend()
