@@ -3,3 +3,8 @@
 
 # Node.js 패키지 및 모듈
 node_modules/
+.nodeenv/
+
+# 디버깅
+model/recipe_bot.ipynb
+model/model_response.json
