@@ -177,6 +177,17 @@ class Server {
       return {status : 500, error : 'Database query failed'}
     }
   }
+
+  async get_previous_recipes(User_ID){
+    try {
+      const query = 'SELECT * FROM Recommended_recipe WHERE User_ID = ? ORDER BY Recommend_Date DESC';
+      const previous_recipes = await db.execute(query, [User_ID]);
+      return {status : 200, error : 'No Error', previous_recipes : previous_recipes}
+    } catch (err) {
+      console.error(err);
+      return {status : 500, error : 'Database query failed', previous_recipes : NaN}
+    }
+  }
 }
 
 

@@ -98,7 +98,7 @@
         }
 
         let recipes_str = '<%- JSON.stringify(recipes) %>'
-        recipes_str = recipes_str.replace(/\n/g, '\\n').replace(/\t/g, '\\t');
+        recipes_str = recipes_str.replace(/\n/g, '\\n');
         const recipes = JSON.parse(recipes_str)
         console.log(recipes); // 객체로 변환된 recipes가 출력되는지 확인
         const recipeDataList = document.querySelectorAll('.recommend-item')
@@ -122,12 +122,14 @@
         const like_button = document.querySelector('.like-button')
         like_button.addEventListener('click', function(){
             const title = document.getElementById("recipe-title").innerText;
-            const ingreds = document.getElementById("ingredients-box-content").innerText;
-            const process = document.getElementById("process-content").innerText;
+            const ingreds_html = document.getElementById("ingredients-box-content").innerHTML;
+            const ingreds = ingreds_html.replace(/<li>/g, '\n').replace(/<\/li>|<ul>|<\/ul>/g, '');
+            const process_html = document.getElementById("process-content").innerHTML;
+            const process = process_html.replace(/<p>/g, '\n').replace(/<\/p>/g, '');
             console.log(title)
             console.log(ingreds)
             console.log(process)
-            fetch(`/recommend/select?title=${title}&ingreds=${ingreds}&process=${process}`, { method : 'POST' })
+            fetch(`/recommend/select?title=${title}&ingreds=${encodeURIComponent(ingreds)}&process=${encodeURIComponent(process)}`, { method : 'POST' })
             .then((r)=>r.text())
             .then((r)=>{
                 like_button.innerText = "선택했음"

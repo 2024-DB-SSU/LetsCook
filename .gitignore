@@ -4,3 +4,4 @@ model/.env
 .env
 *.log
 model/__pycache__
+model/model_response.json

@@ -63,7 +63,10 @@ router.get('/recipe', async(req, res) => {
 router.get('/previous', async(req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
-    res.render('recommend_previous.ejs')
+    let result = await server.get_previous_recipes(req.user.ID)
+    console.log(result.previous_recipes[0])
+    let recipes = result.previous_recipes[0]
+    res.render('recommend_previous.ejs', {recipes : recipes})
   } else {
     // 로그인 상태가 아닐 경우
     res.redirect('/')
@@ -77,7 +80,11 @@ router.post('/select', async(req, res) => {
     console.log(req.query.title)
     console.log(req.query.ingreds)
     console.log(req.query.process)
-    await server.select_recipe(req.user.ID, {title:req.query.title, ingreds:req.query.ingreds, process:req.query.process})
+    const ingreds = decodeURIComponent(req.query.ingreds).replace(/\n/g, '\\n');
+    const process = decodeURIComponent(req.query.process).replace(/\n/g, '\\n');
+    console.log(ingreds)
+    console.log(process)
+    await server.select_recipe(req.user.ID, {title:req.query.title, ingreds:ingreds, process:process})
     res.redirect('/recommend')
   } else {
     // 로그인 상태가 아닐 경우

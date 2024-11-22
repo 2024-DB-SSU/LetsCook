@@ -23,23 +23,25 @@
 
         <!-- 내용이 들어갈 수 있는 큰 박스 -->
         <div class="content-box">
+            <% for(const recipe of recipes){ %>
             <!--레시피 카드-->
             <div class="recipe-card">
                 <!--요리명-->
                 <div class="recipe-title">
                     <p>
                         <span class="title-label">요리명 : </span>
-                        <span class="recipe-name-box"></span>
+                        <span class="recipe-name-box"><%= recipe.Name %></span>
                     </p>
                     <button class="like-button">좋아요</button>
                 </div>
                 <!--재료 및 과정-->
                 <div class="recipe-details">
-                    <p>재료 : <span class="recipe-ingredient"></span></p>
-                    <p>과정 : <span class="recipe-process"></span></p>
+                    <p>재료 : <span class="recipe-ingredient"><%= recipe.Ingredients %></span></p>
+                    <p>과정 : <span class="recipe-process"><%= recipe.Process %></span></p>
                 </div>
             </div>
             <!--추가 카드가 생길 경우 반복-->
+            <% } %>
         </div>
     </div>
 
@@ -48,5 +50,43 @@
         <a href="/main" class="logout-button">뒤로가기</a>
     </footer>
 
+
+    <script>
+        // ingreds
+        const recipe_ingreds = document.querySelectorAll('.recipe-ingredient');
+        console.log(recipe_ingreds)
+        for(const ingred_block of recipe_ingreds){
+            let ingred_txt = ingred_block.textContent;
+            console.log(ingred_txt)
+            const ingreds = ingred_txt.split('\\n').filter(step => step.trim() !== '');
+            console.log(ingreds)
+            ingred_block.innerHTML = '';
+            const ulTag = document.createElement('ul');
+            ingred_block.appendChild(ulTag);
+            ingreds.forEach(ingred => {
+                const liTag = document.createElement('li');
+                liTag.textContent = ingred.trim();
+                ulTag.appendChild(liTag);
+            })
+        }
+
+        // process
+        const recipe_process = document.querySelectorAll('.recipe-process');
+        console.log(recipe_process)
+        for(const process_block of recipe_process){
+            let process_txt = process_block.textContent;
+            console.log(process_txt)
+            const processes = process_txt.split('\\n').filter(step => step.trim() !== '');
+            console.log(processes)
+            process_block.innerHTML = '';
+            processes.forEach(process => {
+                const pTag = document.createElement('p');
+                pTag.textContent = process.trim();
+                process_block.appendChild(pTag);
+            })
+        }
+
+        
+    </script>
 </body>
 </html>
