@@ -10,7 +10,7 @@ def get_data():
     data = request.json
     print("Received from Node.js:", data)
     
-    results = recommend()
+    results = recommend(data['essential'], data['basic'], data['prompt'])
     json_data = json.dumps(results, ensure_ascii=False)
 
     return jsonify(json_data)

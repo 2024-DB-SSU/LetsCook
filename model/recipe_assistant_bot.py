@@ -223,7 +223,7 @@ def ask(client, assistant_id, thread_id, user_inputs):
         return None
 
 
-def recommend():
+def recommend(essential, basic, prompt):
     client = initialize_client()
 
     # Vector store 생성
@@ -237,10 +237,11 @@ def recommend():
     thread_id = create_thread(client)
 
     # 사용자 입력
-    essential = "닭고기, 양배추, 양파, 고구마"
-    available = "감자, 간장, 대파, 마늘, 두부, 계란"
-    cooking_style = "약간 맵게 해줘"
-    user_inputs = make_user_inputs(essential, available, cooking_style)
+    # essential = "닭고기, 양배추, 양파, 고구마"
+    # available = "감자, 간장, 대파, 마늘, 두부, 계란"
+    # cooking_style = "약간 맵게 해줘"
+    user_inputs = make_user_inputs(essential, basic, prompt)
+    print(user_inputs)
 
     # Assistant 호출
     results = ask(client, assistant_id, thread_id, user_inputs)
