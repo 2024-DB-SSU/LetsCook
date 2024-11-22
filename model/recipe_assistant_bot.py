@@ -13,7 +13,7 @@ def initialize_client():
     return OpenAI(api_key=api_key)
 
 
-def create_assistant_with_file_search(client, vector_store_id):
+def create_assistant(client, vector_store_id):
     assistant = client.beta.assistants.create(
         name="Recipe Bot",
         instructions="""
@@ -33,6 +33,10 @@ def create_assistant_with_file_search(client, vector_store_id):
             In addition to your culinary expertise, you can retrieve information from the uploaded documents to enhance your suggestions or answer user queries. Use this knowledge to provide more accurate, detailed, and contextually relevant recipes or suggestions.
 
             If the selected ingredients are insufficient for the recipe, suggest additional ingredients.
+            
+            
+            Do not include any additional commentary, introductions, or explanations outside of the provided structure. 
+            The output must strictly adhere to the following examples:
             
             ### Examples of Recipes:
             
@@ -141,15 +145,23 @@ def wait_on_run(client, run, thread_id):
     return run
 
 
-def submit_message(client, assistant_id, thread_id, user_input):
-    ingredients, cooking_style, document_list = user_input
+def make_user_inputs(essential, available, cooking_style):
+    user_inputs = [essential, available, cooking_style]
+    return user_inputs
+    
+
+def submit_message(client, assistant_id, thread_id, user_inputs):
+    essential, available, cooking_style = user_inputs
+    
     message_content = f"""
     Here are the user's inputs:
-    - Selected ingredients: {ingredients}
+    - Selected essential ingredients: {essential}
+    - Selected available ingredients: {available}
     - Preferred cooking style: {cooking_style}
     
     Please generate three recipes considering the above inputs.
     """
+    
     client.beta.threads.messages.create(
         thread_id=thread_id,
         role="user",
@@ -171,41 +183,70 @@ def print_message(response):
     for res in response:
         print(f"[{res.role.upper()}]\n{res.content[0].text.value}\n")
     print("-" * 50)
+    
+    
+def format_response_to_result(response):
+    results = {}
+    recipes = response[0].content[0].text.value.strip().split("\n---\n")
+    
+    with open("model_response.json", "w", encoding="utf-8") as json_file:
+        json.dump(recipes, json_file, ensure_ascii=False, indent=4)
+    
+    for idx, recipe in enumerate(recipes, start=1):
+        lines = recipe.strip().split("\n")
+        title = lines[0].split(": ")[-1].strip()
+        ingredients_start = lines.index("[재료]") + 1
+        steps_start = lines.index("[조리 방법]") + 1
+
+        ingredients = "\n".join(lines[ingredients_start:steps_start - 1]).strip()
+        steps = "\n".join(lines[steps_start:]).strip()
+
+        results[f"recipe{idx}"] = {
+            "title": title,
+            "ingredients": ingredients,
+            "steps": steps
+        }
+    
+    return results
 
 
-def ask(client, assistant_id, thread_id, user_input):
-    run = submit_message(client, assistant_id, thread_id, user_input)
+def ask(client, assistant_id, thread_id, user_inputs):
+    run = submit_message(client, assistant_id, thread_id, user_inputs)
     run = wait_on_run(client, run, thread_id)
     response_data = get_response(client, thread_id).data
+    
     if response_data:
         print_message(response_data[-1:])
+        return format_response_to_result(response_data[-1:])
     else:
         print("응답이 없습니다.")
-    return run
+        return None
 
 
 def main():
     client = initialize_client()
 
     # Vector store 생성
-    file_paths = ["../crawling/recipes.json"]  # 업로드할 파일 경로
+    file_paths = ["../crawling/recipes.json"]
     vector_store_id = create_vector_store(client, file_paths)
 
     # Assistant 생성
-    assistant_id = create_assistant_with_file_search(client, vector_store_id)
+    assistant_id = create_assistant(client, vector_store_id)
 
     # Thread 생성
     thread_id = create_thread(client)
 
     # 사용자 입력
-    ingredients = "양파, 감자, 간장, 김치, 대파, 삼겹살, 간장, 마늘, 두부, 계란"
+    essential = "닭고기, 양배추, 양파, 고구마"
+    available = "감자, 간장, 대파, 마늘, 두부, 계란"
     cooking_style = "약간 맵게 해줘"
-    document_list = ["../crawling/recipes.json"]  # 관련 문서 목록
-    user_input = [ingredients, cooking_style, document_list]
+    user_inputs = make_user_inputs(essential, available, cooking_style)
 
     # Assistant 호출
-    ask(client, assistant_id, thread_id, user_input)
-
+    results = ask(client, assistant_id, thread_id, user_inputs)
+    with open("model_response.json", "w", encoding="utf-8") as json_file:
+        json.dump(results, json_file, ensure_ascii=False, indent=4)
+    
 
 if __name__ == "__main__":
     main()
