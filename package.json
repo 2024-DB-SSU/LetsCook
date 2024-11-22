@@ -3,19 +3,27 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "cross-env NODE_ENV=DEVELOPMENT webpack --config webpack.dev.js",
+    "build": "cross-env NODE_ENV=PRODUCTION webpack --config webpack.prod.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.21.1",
     "express-mysql-session": "^3.0.3",
     "express-session": "^1.18.1",
     "mysql2": "^3.11.4",
+    "nodemon": "^3.1.7",
+    "openai": "^4.73.0",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0"
   }
