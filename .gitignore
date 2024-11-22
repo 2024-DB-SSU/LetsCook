@@ -2,4 +2,4 @@
 .env
 
 # Node.js 패키지 및 모듈
-node_modules
+node_modules/
