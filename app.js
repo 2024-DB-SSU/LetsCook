@@ -133,7 +133,12 @@ app.use("/recommend", require("./routes/recommend.js"));
 app.get("/likes", async (req, res) => {
   if (req.isAuthenticated()) {
     // 로그인 상태일 경우
-    res.render("likes.ejs");
+    let recipes = await server.get_previous_recipes(req.user.ID);
+    recipes = recipes.previous_recipes[0]
+    // Like가 1인 항목만 필터링
+    const likedRecipes = recipes.filter(recipe => recipe.Like === 1);
+    console.log(likedRecipes)
+    res.render("likes.ejs", {likedRecipes : likedRecipes});
   } else {
     // 로그인 상태가 아닐 경우
     res.redirect("/");
