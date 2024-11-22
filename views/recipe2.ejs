@@ -41,7 +41,7 @@
             <h2 id="recipe-title">요리명</h2>
             <!-- 재료 박스 -->
             <div class="ingredients-box">
-                <p>재료: <span class="ingredients-box-content"></span></p>
+                <p>재료: <span id="ingredients-box-content"></span></p>
             </div>
             <!-- 과정 박스 -->
             <div class="process-box">
@@ -59,7 +59,65 @@
         <a href="/recommend" class="back-button">뒤로가기</a>
     </footer>
 
-    <script src="recipe2.js"></script>
+    <script>
+        // 동적 데이터 표시 함수
+        function displayRecipe(data) {
+            // 우측 박스
+            const rightBox = document.querySelector(".right-box");
+
+            // 요리명
+            const recipeTitle = document.getElementById("recipe-title");
+            recipeTitle.textContent = data.name;
+
+            // 재료
+            const ingredientsBox = document.getElementById("ingredients-box-content");
+            ingredientsBox.innerHTML = ""; // 초기화
+            const ingredientsList = document.createElement("ul");
+            ingredientsBox.appendChild(ingredientsList);
+            ingredientsList.innerHTML = ""; // 초기화
+            data.ingredients = data.ingredients.replace(/-/g, '');
+            const ingredsArray = data.ingredients.split('\n');
+            ingredsArray.forEach(ingred => {
+                const ingredsParagraph = document.createElement("li");
+                ingredsParagraph.textContent = ingred;
+                ingredientsList.appendChild(ingredsParagraph);
+            });
+
+            // 과정
+            const processContent = document.getElementById("process-content");
+            processContent.innerHTML = ""; // 초기화
+            const stepsArray = data.recipe.split('\n');
+            stepsArray.forEach(step => {
+                const stepParagraph = document.createElement("p");
+                stepParagraph.textContent = step;
+                processContent.appendChild(stepParagraph);
+            });
+
+            // 우측 박스 보이기
+            rightBox.classList.remove("hidden");
+        }
+
+        let recipes_str = '<%- JSON.stringify(recipes) %>'
+        recipes_str = recipes_str.replace(/\n/g, '\\n').replace(/\t/g, '\\t');
+        const recipes = JSON.parse(recipes_str)
+        console.log(recipes); // 객체로 변환된 recipes가 출력되는지 확인
+        const recipeDataList = document.querySelectorAll('.recommend-item')
+        console.log(recipeDataList)
+        recipeDataList.forEach(function(item){
+            item.addEventListener('click', function(){
+                let selected_recipe = item.getAttribute('class').split(' ')[1];
+                console.log(selected_recipe)
+                if (selected_recipe) {
+                    // console.log(recipes[selected_recipe])
+                    console.log(recipes.recipe1)
+                    let name = recipes[selected_recipe]["title"] 
+                    let ingredients = recipes[selected_recipe]["ingredients"]
+                    let steps = recipes[selected_recipe]["steps"] 
+                    displayRecipe({name:name, ingredients:ingredients, recipe:steps}); // 데이터 표시
+                }
+            })
+        })
+    </script>
 
 </body>
 

@@ -34,7 +34,7 @@ router.post('/done', async(req, res) => {
     try {
       const response = await axios.post('http://localhost:5000/api/data', user_input);
       const recipes = JSON.parse(response.data);
-      console.log(recipes.recipe1);
+      console.log(recipes);
       res.render('recipe2.ejs', { recipes : recipes })
     } catch (error) {
         console.error("Error:", error);
