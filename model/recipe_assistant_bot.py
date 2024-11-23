@@ -227,7 +227,7 @@ def recommend(essential, basic, prompt):
     client = initialize_client()
 
     # Vector store 생성
-    file_paths = ["../crawling/recipes.json"]
+    file_paths = ["../data/recipes.json"]
     vector_store_id = create_vector_store(client, file_paths)
 
     # Assistant 생성

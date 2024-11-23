@@ -54,7 +54,8 @@ def food_info(name):
 
     return res
 
-def crawl_recipes(recipe_names, save_directory="./data/"):
+
+def crawl_recipes(recipe_names, save_directory="../data/"):
     '''
     Automates the crawling and saving of recipes.
 

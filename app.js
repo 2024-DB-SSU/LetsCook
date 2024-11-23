@@ -110,7 +110,7 @@ app.get("/main", async (req, res) => {
   if (req.isAuthenticated()) {
     let ingreds = server.login_users[req.user.ID].Fridge.ingreds;
     ingreds = await server.cal_remaining_days(ingreds);
-    res.render('main.ejs', {ingreds : ingreds});
+    res.render("main.ejs", { ingreds: ingreds });
   } else {
     res.redirect("/");
   }
