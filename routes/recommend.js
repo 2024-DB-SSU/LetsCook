@@ -93,7 +93,6 @@ router.post('/select', async(req, res) => {
   }
 });
 
-
 // 이전 레시피에서 좋아요 누름
 router.post('/like', async(req, res) => {
   if (req.isAuthenticated()) {
