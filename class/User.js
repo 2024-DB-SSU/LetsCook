@@ -2,7 +2,6 @@ const Fridge = require('./Fridge')
 
 class User {
   constructor(User_info, User_ingreds) {  
-    // console.log(User_info)
     this.ID = User_info.ID;
     this.name = User_info.Name;
     this.email = User_info.Email;
@@ -10,4 +9,4 @@ class User {
   }
 }
 
-module.exports = User;  // 클래스를 export 합니다.
+module.exports = User; 

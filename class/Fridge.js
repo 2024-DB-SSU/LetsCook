@@ -7,4 +7,4 @@ class Fridge {
 
 }
 
-module.exports = Fridge;  // 클래스를 export 합니다.
+module.exports = Fridge;  

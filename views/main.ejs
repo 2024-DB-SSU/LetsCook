@@ -53,9 +53,7 @@
         <a href="/recommend/previous" class="button">이전 검색</a>
     </div>
     <div class="button-row">
-        <!--좋아요를 a태그로-->
         <a href="/likes" class="button">좋아요</a>
-        <!-- <button onclick="navigate('좋아요')" class="button">좋아요</button> -->
         <button onclick="navigate('레시피 보기')" class="button">레시피 보기</button>
     </div>
     <div class="large-button">
@@ -77,7 +75,6 @@
         fetch(`/add_ingred/change_status?ingred_name=${ingred_name}&ingred_status=${Number(button.getAttribute('id'))}`, { method : 'POST' })
         .then((r)=>r.text())
         .then((r)=>{
-          // 기존 태그와 새로운 부모 노드 선택
           const elementToMove = button; 
           let txt = null;
 
@@ -92,7 +89,6 @@
           const newParent = document.querySelector(txt);
           console.log(newParent)
 
-          // 요소를 새로운 부모에 추가
           newParent.appendChild(elementToMove);
         })
       })
@@ -105,7 +101,6 @@
         fetch(`/add_ingred/delete_ingred?ingred_name=${ingred_name}`, { method : 'DELETE' })
         .then((r)=>r.text())
         .then((r)=>{
-          // 기존 태그와 새로운 부모 노드 선택
           button.style.display = 'none'
         })
       })

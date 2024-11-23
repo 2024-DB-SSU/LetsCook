@@ -16,12 +16,10 @@
 
     <!-- 메인 컨테이너 -->
     <div class="container">
-        <!-- 내가 좋아요 누른 레시피 제목 -->
         <div class="title-box">
             <h2>내가 좋아요한 레시피</h2>
         </div>
 
-        <!-- 내용이 들어갈 수 있는 큰 박스 -->
         <div class="content-box">
             <% for(let i = 0; i < likedRecipes.length; i++){ %>
             <!--레시피 카드-->
@@ -39,7 +37,6 @@
                     <p>과정 : <span class="recipe-process"><%= likedRecipes[i].Process %></span></p>
                 </div>
             </div>
-            <!--추가 카드가 생길 경우 반복-->
             <% } %>
         </div>
     </div>
@@ -53,12 +50,9 @@
     <script>
         // ingreds
         const recipe_ingreds = document.querySelectorAll('.recipe-ingredient');
-        console.log(recipe_ingreds)
         for(const ingred_block of recipe_ingreds){
             let ingred_txt = ingred_block.textContent;
-            console.log(ingred_txt)
             const ingreds = ingred_txt.split('\\n').filter(step => step.trim() !== '');
-            console.log(ingreds)
             ingred_block.innerHTML = '';
             const ulTag = document.createElement('ul');
             ingred_block.appendChild(ulTag);
@@ -71,12 +65,9 @@
 
         // process
         const recipe_process = document.querySelectorAll('.recipe-process');
-        console.log(recipe_process)
         for(const process_block of recipe_process){
             let process_txt = process_block.textContent;
-            console.log(process_txt)
             const processes = process_txt.split('\\n').filter(step => step.trim() !== '');
-            console.log(processes)
             process_block.innerHTML = '';
             processes.forEach(process => {
                 const pTag = document.createElement('p');

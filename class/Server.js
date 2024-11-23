@@ -39,7 +39,6 @@ class Server {
 
     for(const user of user_list){
       if(ID === user.ID){
-        console.log("중복되는 아이디")
         return {result : -1, message : '중복되는 아이디'}
       }
     }
@@ -188,19 +187,14 @@ class Server {
       let date = new Date(recipe_info.Date)
       // 년, 월, 일, 시, 분, 초 추출
       const year = date.getUTCFullYear();
-      const month = String(date.getUTCMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1 해줍니다
+      const month = String(date.getUTCMonth() + 1).padStart(2, '0'); 
       const day = String(date.getUTCDate()).padStart(2, '0');
       const hours = String(date.getUTCHours()).padStart(2, '0');
       const minutes = String(date.getUTCMinutes()).padStart(2, '0');
       const seconds = String(date.getUTCSeconds()).padStart(2, '0');
 
-      // 원하는 형식으로 문자열 결합
+      // 원하는 형태로 문자열 결합
       date = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
-
-      console.log(recipe_info.Name)
-      console.log(date)
-      console.log(User_ID)
-      console.log(recipe_status)
       const values = [recipe_status, User_ID, recipe_info.Name, date];
       await db.execute(query, values);
       return {status : 200, error : 'No Error'}

@@ -1,5 +1,5 @@
-// ==================== 세팅 ===========================================
-const passport = require("./passport"); // 분리한 파일 불러오기
+// ================================ 세팅 ===========================================
+const passport = require("./passport"); 
 const express = require("express");
 const session = require("express-session");
 const bcrypt = require("bcrypt");
@@ -10,7 +10,7 @@ const app = express();
 app.use(express.static(__dirname + "/public"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.set("view engine", "ejs"); // 템플릿 엔진으로 ejs 설정
+app.set("view engine", "ejs"); 
 
 // passport 설정
 app.use(
@@ -37,18 +37,16 @@ app.use(passport.session());
 app.listen(8080, () => {
   console.log("http://localhost:8080 에서 실행 중입니다.");
 });
-// ======================================================================
-// ======================================================================
+// ==============================================================================
+// ==============================================================================
 
 
 
 // =============== 첫 페이지 ===============
 app.get("/", async (req, res) => {
   if (req.isAuthenticated()) {
-    // 로그인 상태일 경우
     res.redirect("/main");
   } else {
-    // 로그인 상태가 아닐 경우
     res.render("index.ejs");
   }
 });
@@ -59,11 +57,8 @@ app.get("/", async (req, res) => {
 // =============== 회원가입/로그인/로그아웃 ===============
 app.post("/sign_in", async (req, res) => {
   if (req.isAuthenticated()) {
-    // 로그인 상태일 경우
     res.redirect("/main");
   } else {
-    // 로그인 상태가 아닐 경우
-    console.log(req.body);
     let hashed = await bcrypt.hash(req.body.PWD, 10);
     const result = await server.signin(req.body.ID, hashed, req.body.email, req.body.Name);
     console.log(result);
@@ -73,10 +68,8 @@ app.post("/sign_in", async (req, res) => {
 
 app.post("/log_in", async (req, res, next) => {
   if (req.isAuthenticated()) {
-    // 로그인 상태일 경우
     res.redirect("/main");
   } else {
-    // 로그인 상태가 아닐 경우
     passport.authenticate("local", (error, user, info) => {
       if (error) return res.status(500).json(error);
       if (!user) return res.status(401).json(info.message);
@@ -91,11 +84,10 @@ app.post("/log_in", async (req, res, next) => {
 
 app.get("/log_out", (req, res, next) => {
   if (req.isAuthenticated()) {
-    // 로그인 상태일 경우
     let user_ID = req.user.ID;
     req.logout((err) => {
       if (err) {
-        return next(err); // 에러가 있을 경우 처리
+        return next(err); 
       }
       req.session.destroy((err) => {
         if (err) {
@@ -103,10 +95,9 @@ app.get("/log_out", (req, res, next) => {
         }
       });
       server.logout(user_ID);
-      res.redirect("/"); // 로그아웃 후 리다이렉트
+      res.redirect("/"); 
     });
   } else {
-    // 로그인 상태가 아닐 경우
     res.redirect("/");
   }
 });
@@ -117,12 +108,10 @@ app.get("/log_out", (req, res, next) => {
 // =============== 메인 페이지 ===============
 app.get("/main", async (req, res) => {
   if (req.isAuthenticated()) {
-    // 로그인 상태일 경우
     let ingreds = server.login_users[req.user.ID].Fridge.ingreds;
     ingreds = await server.cal_remaining_days(ingreds);
     res.render('main.ejs', {ingreds : ingreds});
   } else {
-    // 로그인 상태가 아닐 경우
     res.redirect("/");
   }
 });
@@ -145,15 +134,11 @@ app.use("/recommend", require("./routes/recommend.js"));
 // ================ 좋아요 ====================
 app.get("/likes", async (req, res) => {
   if (req.isAuthenticated()) {
-    // 로그인 상태일 경우
     let recipes = await server.get_previous_recipes(req.user.ID);
     recipes = recipes.previous_recipes[0]
-    // Like가 1인 항목만 필터링
     const likedRecipes = recipes.filter(recipe => recipe.Like === 1);
-    console.log(likedRecipes)
     res.render("likes.ejs", {likedRecipes : likedRecipes});
   } else {
-    // 로그인 상태가 아닐 경우
     res.redirect("/");
   }
 });
