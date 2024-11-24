@@ -51,15 +51,15 @@ h1 {
     padding: 20px;
     display: flex;
     flex-direction: column; /* 내부는 세로 정렬 */
-    gap: 20px;
-    align-items: flex-start;
+    gap: 90px; /* 아이템 간의 간격을 더 넓게 설정 */
+    align-items: stretch; /* 아이템을 박스 너비에 맞추어 정렬 */
 }
 
 .recommend-item {
     background-color: rgba(240, 240, 240, 1);
     border-radius: 15px;
-    padding: 15px;
-    width: 100%;
+    padding: 20px; /* 박스 내부 간격 추가 */
+    width: 100%; /* 박스가 부모의 너비를 가득 차도록 설정 */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -76,14 +76,15 @@ h1 {
     padding: 8px 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    text-align: center; /* 텍스트 가운데 정렬 */
 }
 
-.image-box {
+/* .image-box {
     width: 100%;
     height: 200px;
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.1);
-}
+} */
 
 /* 오른쪽 상세 정보 박스 */
 .right-box {
