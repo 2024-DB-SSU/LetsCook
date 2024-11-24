@@ -66,9 +66,9 @@ h1 {
     border-bottom: 2px solid #999;
     position: relative;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: flex-start;
-    padding-left: 20px;
+    padding: 10px;
 }
 
 .fridge-section.top {
@@ -99,6 +99,34 @@ h1 {
 
 .all {
     background-color: #b3d9ff; /* 전체 재료 색상 */
+}
+
+.ingred-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개 */
+    grid-auto-rows: min-content; /* 줄 높이를 자동으로 설정 */
+    gap: 10px; /* 박스 간 간격 */
+    margin: 10px 0;
+    padding: 10px;
+    overflow-y: auto; /* 스크롤 활성화 */
+    align-items: start; /* 아이템 정렬 */
+}
+
+.ingred-box {
+    background-color: #ffffff;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.ingred-box p {
+    margin: 5px 0;
+    font-size: 0.85rem;
+    color: #333;
 }
 
 /* 오른쪽: 재료 등록 폼 */
@@ -140,27 +168,6 @@ h1 {
 
 .register-form button:hover {
     background-color: #999;
-}
-
-/* 뒤로가기 버튼 스타일 */
-footer {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-}
-
-footer button {
-    background-color: #666;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-footer button:hover {
-    background-color: #444;
 }
 
 /* 뒤로가기 버튼 스타일 */

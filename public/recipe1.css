@@ -66,9 +66,20 @@ h1 {
     border-bottom: 2px solid #999;
     position: relative;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: flex-start;
-    padding-left: 20px;
+    padding: 10px;
+}
+
+.fridge-section.top {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.fridge-section.bottom {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom: none;
 }
 
 .label {
@@ -82,11 +93,39 @@ h1 {
 }
 
 .essential {
-    background-color: #ffcccb;
+    background-color: #ffcccb; /* 필수 재료 색상 */
 }
 
 .all {
-    background-color: #b3d9ff;
+    background-color: #b3d9ff; /* 전체 재료 색상 */
+}
+
+.ingred-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개 */
+    grid-auto-rows: min-content; /* 줄 높이를 자동으로 설정 */
+    gap: 10px; /* 박스 간 간격 */
+    margin: 10px 0;
+    padding: 10px;
+    overflow-y: auto; /* 스크롤 활성화 */
+    align-items: start; /* 아이템 정렬 */
+}
+
+.ingred-box {
+    background-color: #ffffff;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.ingred-box p {
+    margin: 5px 0;
+    font-size: 0.85rem;
+    color: #333;
 }
 
 /* 오른쪽: 레시피 추천 */
@@ -95,9 +134,9 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center; /* 전체 영역 중앙 정렬 */
+    justify-content: center;
     padding: 20px;
-    gap: 30px; /* 입력 필드와 버튼 간격 조정 */
+    gap: 30px;
 }
 
 .status-input {
@@ -117,11 +156,10 @@ h1 {
     width: 250px;
 }
 
-/* 레시피 추천 버튼 */
 .large-button {
     display: inline-block;
-    width: 250px; /* 버튼 너비 */
-    height: 80px; /* 버튼 높이 */
+    width: 250px;
+    height: 80px;
     background-color: #ccc;
     border: none;
     border-radius: 15px;
@@ -130,17 +168,14 @@ h1 {
     color: black;
     cursor: pointer;
     transition: background-color 0.3s;
-    line-height: 80px; /* 버튼 텍스트 수직 정렬 */
-    margin-top: 20px; /* "오늘의 기분 입력" 필드와 간격 추가 */
-    position: relative;
-    left: 70px;
+    line-height: 80px; /* 텍스트 수직 정렬 */
 }
 
 .large-button:hover {
     background-color: #aaa;
 }
 
-/* 뒤로가기 버튼 스타일 */
+/* 뒤로가기 버튼 */
 footer {
     position: absolute;
     bottom: 10px;
