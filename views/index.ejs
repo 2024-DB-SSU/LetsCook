@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Let's Cook</title>
     <link rel="stylesheet" href="/index.css">
+    <!-- <script defer src="login-page.js"></script> -->
 </head>
 
 <body>
@@ -26,48 +27,12 @@
                 <h2>Sign Up</h2>
                 <input type="text" name="ID" class="form-field" placeholder="ID">
                 <input type="password" name="PWD" class="form-field" placeholder="Password">
-                <input type="text" name="Name" class="form-field" placeholder="Name">
+                <input type="text", name="Name" class="form-field" placeholder="Name">
                 <input type="email" name="email" class="form-field" placeholder="Email">
                 <button type="submit" id="signup-form-submit">Sign up</button>
             </form>
         </div>
     </main>
-
-    <script>
-        document.getElementById("login-form").addEventListener("submit", async (event) => {
-            event.preventDefault(); // 기본 폼 제출 동작 막기
-
-            const form = event.target;
-            const formData = new FormData(form);
-
-            const payload = {
-                ID: formData.get("ID"),
-                PWD: formData.get("PWD"),
-            };
-
-            try {
-                const response = await fetch("/log_in", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(payload),
-                });
-
-                if (response.ok) {
-                    // 로그인 성공 시 메인 페이지로 이동
-                    window.location.href = "/main";
-                } else {
-                    const data = await response.json();
-                    // 실패 메시지 alert로 표시
-                    alert(data.message || "Login failed. Please try again.");
-                }
-            } catch (error) {
-                console.error("Error:", error);
-                alert("An unexpected error occurred. Please try again later.");
-            }
-        });
-    </script>
 </body>
 
 </html>

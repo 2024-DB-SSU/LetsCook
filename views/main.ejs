@@ -15,97 +15,112 @@
   </header>
 
   <div class="container">
-    <!--왼쪽 영역(냉장고)-->
+    <!-- 왼쪽 영역 (냉장고) -->
     <div class="left-side">
       <h2>My 냉장고</h2>
       <div class="fridge">
-        <!--필수 재료 냉장고-->
+        <!-- 필수 재료 냉장고 -->
         <div class="fridge-section top">
           <div class="label essential">필수 재료</div>
-          <% for(let ingred of ingreds) { %>
-            <% if(ingred.Status === 1) { %>
-              <div class="button ingred" id="0">
-                <p><%= ingred.Name %></p>
-                <p><%= ingred.remainingDays %></p>
-              </div> 
+          <div class="ingred-container">
+            <% let essentialCount = 0; %>
+            <% for (let ingred of ingreds) { %>
+              <% if (ingred.Status === 1 && essentialCount < 12) { essentialCount++; %>
+                <div class="ingred-box" id="1">
+                  <p><%= ingred.Name %></p>
+                  <p><%= ingred.remainingDays %>일 남음</p>
+                </div>
+              <% } %>
             <% } %>
-          <% } %>
+          </div>
         </div>
-        <!--전체 재료 냉장고-->
+
+        <!-- 전체 재료 냉장고 -->
         <div class="fridge-section bottom">
           <div class="label all">전체 재료</div>
-          <% for(let ingred of ingreds) { %>
-            <% if(ingred.Status === 0) { %>
-              <div class="button ingred" id="1">
-                <p><%= ingred.Name %></p>
-                <p><%= ingred.remainingDays %></p>
-              </div> 
+          <div class="ingred-container">
+            <% let allCount = 0; %>
+            <% for (let ingred of ingreds) { %>
+              <% if (ingred.Status === 0 && allCount < 12) { allCount++; %>
+                <div class="ingred-box" id="0">
+                  <p><%= ingred.Name %></p>
+                  <p><%= ingred.remainingDays %>일 남음</p>
+                </div>
+              <% } %>
             <% } %>
-          <% } %>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <!-- 오른쪽 영역 (버튼) -->
+    <div class="right-side">
+      <div class="button-row">
+        <a href="/add_ingred" class="button">재료 등록</a>
+        <a href="/recommend/previous" class="button">이전 검색</a>
+      </div>
+      <div class="button-row">
+        <a href="/likes" class="button">좋아요</a>
+        <button onclick="navigate('레시피 보기')" class="button">레시피 보기</button>
+      </div>
+      <div class="large-button">
+        <a href="/recommend" class="button large">레시피 추천</a>
+      </div>
     </div>
   </div>
 
-  <!--오른쪽 영역(버튼)-->
-  <div class="right-side">
-    <div class="button-row">
-        <a href="/add_ingred" class="button">재료 등록</a>
-        <a href="/recommend/previous" class="button">이전 검색</a>
-    </div>
-    <div class="button-row">
-        <a href="/likes" class="button">좋아요</a>
-        <button onclick="navigate('레시피 보기')" class="button">레시피 보기</button>
-    </div>
-    <div class="large-button">
-        <a href="/recommend" class="button large">레시피 추천</a>
-    </div>
-</div>
-
-  <!-- 로그아웃 버튼-->
+  <!-- 로그아웃 버튼 -->
   <footer>
     <a href="/log_out" class="logout-button">로그아웃</a>
   </footer>
 
-
-  <!-- ajax -->
+  <!-- JavaScript -->
   <script>
-    document.querySelectorAll('.ingred').forEach(function(button){
-      button.addEventListener('click', function(){
-        let ingred_name = button.querySelector('p').textContent
-        fetch(`/add_ingred/change_status?ingred_name=${ingred_name}&ingred_status=${Number(button.getAttribute('id'))}`, { method : 'POST' })
-        .then((r)=>r.text())
-        .then((r)=>{
-          const elementToMove = button; 
-          let txt = null;
+    // 좌클릭 이벤트 리스너
+    document.querySelectorAll('.ingred-box').forEach(function (button) {
+      button.addEventListener('click', function () {
+        const ingred_name = button.querySelector('p').textContent;
+        const currentStatus = Number(button.getAttribute('id'));
 
-          if(Number(button.getAttribute('id')) === 1) {
-            txt = ".top";
-            button.setAttribute('id','0')
-          }
-          else{
-            txt = ".bottom"
-            button.setAttribute('id','1')
-          }
-          const newParent = document.querySelector(txt);
-          console.log(newParent)
+        fetch(`/add_ingred/change_status?ingred_name=${ingred_name}&ingred_status=${currentStatus}`, { method: 'POST' })
+          .then((r) => r.text())
+          .then(() => {
+            const elementToMove = button;
+            let targetContainer;
 
-          newParent.appendChild(elementToMove);
-        })
-      })
-    })
+            // 이동할 대상 컨테이너 선택
+            if (currentStatus === 1) {
+              targetContainer = document.querySelector('.fridge-section.bottom .ingred-container'); // 전체 재료
+              button.setAttribute('id', '0'); // 상태 변경
+            } else {
+              targetContainer = document.querySelector('.fridge-section.top .ingred-container'); // 필수 재료
+              button.setAttribute('id', '1'); // 상태 변경
+            }
 
-    document.querySelectorAll('.ingred').forEach(function(button){
-      button.addEventListener('contextmenu', function(){
-        event.preventDefault();
-        let ingred_name = button.querySelector('p').textContent
-        fetch(`/add_ingred/delete_ingred?ingred_name=${ingred_name}`, { method : 'DELETE' })
-        .then((r)=>r.text())
-        .then((r)=>{
-          button.style.display = 'none'
-        })
-      })
-    })
-      
+            // 대상 컨테이너에 추가
+            targetContainer.appendChild(elementToMove);
+
+            // 강제 스타일 재계산 (문제 해결)
+            targetContainer.style.display = 'none'; // 일시적으로 숨김
+            targetContainer.offsetHeight; // 강제로 리플로우 트리거
+            targetContainer.style.display = 'grid'; // 다시 표시
+          });
+      });
+    });
+
+    // 우클릭 이벤트 리스너
+    document.querySelectorAll('.ingred-box').forEach(function(button) {
+      button.addEventListener('contextmenu', function(event) { // 이벤트 객체 전달
+        event.preventDefault(); // 기본 동작 막기
+        const ingred_name = button.querySelector('p').textContent;
+        fetch(`/add_ingred/delete_ingred?ingred_name=${ingred_name}`, { method: 'DELETE' })
+          .then((r) => r.text())
+          .then(() => {
+            button.style.display = 'none';
+          });
+      });
+    });
   </script>
 </body>
+
 </html>

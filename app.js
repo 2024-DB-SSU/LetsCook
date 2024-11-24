@@ -68,22 +68,16 @@ app.post("/sign_in", async (req, res) => {
 
 app.post("/log_in", async (req, res, next) => {
   if (req.isAuthenticated()) {
+    // 로그인 상태일 경우
     res.redirect("/main");
   } else {
+    // 로그인 상태가 아닐 경우
     passport.authenticate("local", (error, user, info) => {
-      if (error) {
-        // 서버 내부 오류
-        return res.status(500).json({ message: "Internal Server Error" });
-      }
-      if (!user) {
-        // 인증 실패 시 사용자에게 메시지 반환
-        return res.status(401).json({ message: "Invalid ID or Password. Please try again." });
-      }
+      if (error) return res.status(500).json(error);
+      if (!user) return res.status(401).json(info.message);
       req.logIn(user, (err) => {
-        if (err) {
-          return next(err);
-        }
-        // 로그인 성공 시
+        if (err) return next(err);
+        server.login(req.user);
         res.redirect("/main");
       });
     })(req, res, next);
