@@ -101,6 +101,7 @@ h1 {
     background-color: #b3d9ff; /* 전체 재료 색상 */
 }
 
+/* 재료 박스 컨테이너 */
 .ingred-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* 한 줄에 4개 */
@@ -108,10 +109,13 @@ h1 {
     gap: 10px; /* 박스 간 간격 */
     margin: 10px 0;
     padding: 10px;
+    max-height: calc(100% - 40px); /* 상단 라벨 높이 제외 */
     overflow-y: auto; /* 스크롤 활성화 */
     align-items: start; /* 아이템 정렬 */
 }
 
+
+/* 재료 박스 스타일 */
 .ingred-box {
     background-color: #ffffff;
     border: 2px solid #ccc;
@@ -119,8 +123,14 @@ h1 {
     text-align: center;
     padding: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
     font-size: 0.9rem;
-    margin: 0;
+    margin: 0; /* 기본 마진 제거 */
+}
+
+.ingred-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .ingred-box p {
@@ -128,6 +138,20 @@ h1 {
     font-size: 0.85rem;
     color: #333;
 }
+
+
+/* 필수 재료 배경 색 */
+.fridge-section.top .ingred-box {
+    background-color: #ffe5e5; /* 필수 재료 배경 */
+}
+
+/* 전체 재료 배경 색 */
+.fridge-section.bottom .ingred-box {
+    background-color: #e6f7ff; /* 전체 재료 배경 */
+}
+
+
+
 
 /* 오른쪽: 재료 등록 폼 */
 .right-side {
