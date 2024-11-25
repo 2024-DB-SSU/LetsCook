@@ -25,10 +25,16 @@
           <div class="ingred-container">
             <% let essentialCount = 0; %>
             <% for (let ingred of ingreds) { %>
-              <% if (ingred.Status === 1 && essentialCount < 12) { essentialCount++; %>
+              <% if (ingred.Status === 1) { essentialCount++; %>
                 <div class="ingred-box" id="0">
                   <p><%= ingred.Name %></p>
-                  <p><%= ingred.remainingDays %>일 남음</p>
+                  <% if (ingred.remainingDays <= 10) { %>
+                    <% if (ingred.remainingDays > 0) { %>
+                    <p>D - <%= ingred.remainingDays %></p>
+                    <% } else {%> 
+                      <p>D + <%= -(ingred.remainingDays) %></p>
+                      <% } %> 
+                  <% } %> 
                 </div>
               <% } %>
             <% } %>
@@ -41,10 +47,16 @@
           <div class="ingred-container">
             <% let allCount = 0; %>
             <% for (let ingred of ingreds) { %>
-              <% if (ingred.Status === 0 && allCount < 12) { allCount++; %>
+              <% if (ingred.Status === 0) { allCount++; %>
                 <div class="ingred-box" id="1">
                   <p><%= ingred.Name %></p>
-                  <p><%= ingred.remainingDays %>일 남음</p>
+                  <% if (ingred.remainingDays <= 10) { %>
+                    <% if (ingred.remainingDays > 0) { %>
+                      <p>D - <%= ingred.remainingDays %></p>
+                    <% } else {%> 
+                      <p>D + <%= -(ingred.remainingDays) %></p>
+                      <% } %> 
+                  <% } %> 
                 </div>
               <% } %>
             <% } %>
