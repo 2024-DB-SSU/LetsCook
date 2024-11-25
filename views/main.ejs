@@ -26,7 +26,7 @@
             <% let essentialCount = 0; %>
             <% for (let ingred of ingreds) { %>
               <% if (ingred.Status === 1 && essentialCount < 12) { essentialCount++; %>
-                <div class="ingred-box" id="1">
+                <div class="ingred-box" id="0">
                   <p><%= ingred.Name %></p>
                   <p><%= ingred.remainingDays %>일 남음</p>
                 </div>
@@ -42,7 +42,7 @@
             <% let allCount = 0; %>
             <% for (let ingred of ingreds) { %>
               <% if (ingred.Status === 0 && allCount < 12) { allCount++; %>
-                <div class="ingred-box" id="0">
+                <div class="ingred-box" id="1">
                   <p><%= ingred.Name %></p>
                   <p><%= ingred.remainingDays %>일 남음</p>
                 </div>
@@ -61,10 +61,7 @@
       </div>
       <div class="button-row">
         <a href="/likes" class="button">좋아요</a>
-        <button onclick="navigate('레시피 보기')" class="button">레시피 보기</button>
-      </div>
-      <div class="large-button">
-        <a href="/recommend" class="button large">레시피 추천</a>
+        <a href="/recommend" class="button">레시피 추천</a>
       </div>
     </div>
   </div>
@@ -90,10 +87,10 @@
 
             // 이동할 대상 컨테이너 선택
             if (currentStatus === 1) {
-              targetContainer = document.querySelector('.fridge-section.bottom .ingred-container'); // 전체 재료
+              targetContainer = document.querySelector('.fridge-section.top .ingred-container'); // 필수 재료
               button.setAttribute('id', '0'); // 상태 변경
             } else {
-              targetContainer = document.querySelector('.fridge-section.top .ingred-container'); // 필수 재료
+              targetContainer = document.querySelector('.fridge-section.bottom .ingred-container'); // 전체 재료
               button.setAttribute('id', '1'); // 상태 변경
             }
 

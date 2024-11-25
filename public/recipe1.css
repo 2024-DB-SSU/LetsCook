@@ -169,6 +169,9 @@ h1 {
     cursor: pointer;
     transition: background-color 0.3s;
     line-height: 80px; /* 텍스트 수직 정렬 */
+
+    margin-top: 20px; /* "오늘의 기분" 입력 필드와의 간격 */
+    transform: translateX(60px); /* 버튼을 오른쪽으로 20px 이동 */
 }
 
 .large-button:hover {
