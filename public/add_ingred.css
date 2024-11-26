@@ -126,8 +126,8 @@ h1 {
     transition: transform 0.2s, box-shadow 0.2s;
     font-size: 0.9rem;
     margin: 0; /* 기본 마진 제거 */
-    width: 115px;
-    height: 75px;
+    width: 100px;
+    height: 65px;
 }
 
 .ingred-box:hover {
