@@ -116,19 +116,20 @@
             const ingreds = ingreds_html.replace(/<li>/g, '\n').replace(/<\/li>|<ul>|<\/ul>/g, '');
             const process_html = document.getElementById("process-content").innerHTML;
             const process = process_html.replace(/<p>/g, '\n').replace(/<\/p>/g, '');
+            like_button.innerText = "선택했음"
+            // 좋아요 버튼 또 누르지 못하도록 이벤트리스너 제거
+            const selected = like_button.cloneNode(true);
+            like_button.replaceWith(selected);
+            // 다른 레시피 클릭 못하도록 이벤트리스너 제거
+            document.querySelectorAll('.recommend-item').forEach(function(item){
+                const newItem = item.cloneNode(true);
+                item.replaceWith(newItem);
+            })
+            
             fetch(`/recommend/select?title=${title}&ingreds=${encodeURIComponent(ingreds)}&process=${encodeURIComponent(process)}`, { method : 'POST' })
             .then((r)=>r.text())
             .then((r)=>{
-                like_button.innerText = "선택했음"
-                // 좋아요 버튼 또 누르지 못하도록 이벤트리스너 제거
-                const selected = like_button.cloneNode(true);
-                like_button.replaceWith(selected);
                 
-                // 다른 레시피 클릭 못하도록 이벤트리스너 제거
-                document.querySelectorAll('.recommend-item').forEach(function(item){
-                    const newItem = item.cloneNode(true);
-                    item.replaceWith(newItem);
-                })
             })
         })
     
