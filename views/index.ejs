@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Let's Cook</title>
     <link rel="stylesheet" href="/index.css">
-    <!-- <script defer src="login-page.js"></script> -->
 </head>
 
 <body>
@@ -33,6 +32,22 @@
             </form>
         </div>
     </main>
+
+    <!-- 로그인 실패 시 alert 표시 -->
+    <script>
+        <% if (typeof loginFailed !== 'undefined' && loginFailed) { %>
+            alert("로그인에 실패했습니다. ID와 비밀번호를 확인해주세요.");
+        <% } %>
+    </script>
+
+    <!-- 회원가입 실패 시 alert 표시 -->
+    <script>
+        <% if (typeof signupFailed !== 'undefined' && signupFailed) { %>
+            alert("<%= signupMessage %>");
+        <% } %>
+    </script>
+
 </body>
+
 
 </html>
