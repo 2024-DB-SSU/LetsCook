@@ -57,14 +57,25 @@ app.get("/", async (req, res) => {
 // =============== 회원가입/로그인/로그아웃 ===============
 app.post("/sign_in", async (req, res) => {
   if (req.isAuthenticated()) {
-    res.redirect("/main");
+      res.redirect("/main");
   } else {
-    let hashed = await bcrypt.hash(req.body.PWD, 10);
-    const result = await server.signin(req.body.ID, hashed, req.body.email, req.body.Name);
-    console.log(result);
-    res.redirect("/");
+      let hashed = await bcrypt.hash(req.body.PWD, 10);
+      const result = await server.signin(req.body.ID, hashed, req.body.email, req.body.Name);
+
+      if (result.status === 409) {
+          // 회원가입 실패 시 index.ejs로 메시지 추가하여 렌더링
+          return res.render("index.ejs", {
+              signupFailed: true,
+              signupMessage: "이미 존재하는 아이디입니다. 다른 아이디를 사용해주세요."
+          });
+      } else if (result.status === 200) {
+          res.redirect("/");
+      } else {
+          return res.status(500).send("회원가입 중 문제가 발생했습니다.");
+      }
   }
 });
+
 
 app.post("/log_in", async (req, res, next) => {
   if (req.isAuthenticated()) {
@@ -74,7 +85,10 @@ app.post("/log_in", async (req, res, next) => {
     // 로그인 상태가 아닐 경우
     passport.authenticate("local", (error, user, info) => {
       if (error) return res.status(500).json(error);
-      if (!user) return res.status(401).json(info.message);
+      if (!user) {
+        // 로그인 실패 시 index.ejs로 alert 추가하여 렌더링
+        return res.render("index.ejs", { loginFailed: true });
+      }
       req.logIn(user, (err) => {
         if (err) return next(err);
         server.login(req.user);
@@ -83,6 +97,8 @@ app.post("/log_in", async (req, res, next) => {
     })(req, res, next);
   }
 });
+
+
 
 
 app.get("/log_out", (req, res, next) => {
