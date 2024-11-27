@@ -87,34 +87,31 @@
         // 좌클릭 이벤트 리스너
         document.querySelectorAll('.ingred-box').forEach(function (button) {
         button.addEventListener('click', function () {
-            const ingred_name = button.querySelector('p').textContent;
-            const currentStatus = Number(button.getAttribute('id'));
-    
-            fetch(`/add_ingred/change_status?ingred_name=${ingred_name}&ingred_status=${currentStatus}`, { method: 'POST' })
-                .then((r) => r.text())
-                .then(() => {
-                    const elementToMove = button;
-                    let targetContainer;
-        
-                    // 이동할 대상 컨테이너 선택
-                    if (currentStatus === 1) {
-                    targetContainer = document.querySelector('.fridge-section.top .ingred-container'); // 필수 재료
-                    button.setAttribute('id', '0'); // 상태 변경
-                    } else {
-                    targetContainer = document.querySelector('.fridge-section.bottom .ingred-container'); // 전체 재료
-                    button.setAttribute('id', '1'); // 상태 변경
-                    }
-        
-                    // 대상 컨테이너에 추가
-                    targetContainer.appendChild(elementToMove);
-        
-                    // 강제 스타일 재계산 (문제 해결)
-                    targetContainer.style.display = 'none'; // 일시적으로 숨김
-                    targetContainer.offsetHeight; // 강제로 리플로우 트리거
-                    targetContainer.style.display = 'grid'; // 다시 표시
-                });
-            });
+        const ingred_name = button.querySelector('p').textContent;
+        const currentStatus = Number(button.getAttribute('id'));
+        const elementToMove = button;
+        let targetContainer;
+
+        // 이동할 대상 컨테이너 선택
+        if (currentStatus === 1) {
+          targetContainer = document.querySelector('.fridge-section.top .ingred-container'); // 필수 재료
+          button.setAttribute('id', '0'); // 상태 변경
+        } else {
+          targetContainer = document.querySelector('.fridge-section.bottom .ingred-container'); // 전체 재료
+          button.setAttribute('id', '1'); // 상태 변경
+        }
+
+        // 대상 컨테이너에 추가
+        targetContainer.appendChild(elementToMove);
+
+        // 강제 스타일 재계산 (문제 해결)
+        targetContainer.style.display = 'none'; // 일시적으로 숨김
+        targetContainer.offsetHeight; // 강제로 리플로우 트리거
+        targetContainer.style.display = 'grid'; // 다시 표시
+        fetch(`/add_ingred/change_status?ingred_name=${ingred_name}&ingred_status=${currentStatus}`, { method: 'POST' })
+        .then((r) => r.text())
         });
+    });
     
         // 우클릭 이벤트 리스너
         document.querySelectorAll('.ingred-box').forEach(function(button) {
