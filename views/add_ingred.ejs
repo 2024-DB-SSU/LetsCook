@@ -113,16 +113,14 @@
     
         // 우클릭 이벤트 리스너
         document.querySelectorAll('.ingred-box').forEach(function(button) {
-          button.addEventListener('contextmenu', function(event) { // 이벤트 객체 전달
+        button.addEventListener('contextmenu', function(event) { // 이벤트 객체 전달
             event.preventDefault(); // 기본 동작 막기
             const ingred_name = button.querySelector('p').textContent;
+            button.style.display = 'none';
             fetch(`/add_ingred/delete_ingred?ingred_name=${ingred_name}`, { method: 'DELETE' })
             .then((r) => r.text())
-            .then(() => {
-                button.style.display = 'none';
-                });
-            });
         });
+    });
     </script>
 </body>
 
