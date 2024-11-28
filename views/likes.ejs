@@ -57,7 +57,7 @@
             const ulTag = document.createElement('ul');
             ingred_block.appendChild(ulTag);
             ingreds.forEach(ingred => {
-                const liTag = document.createElement('li');
+                const liTag = document.createElement('p');
                 liTag.textContent = ingred.trim();
                 ulTag.appendChild(liTag);
             })

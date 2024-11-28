@@ -13,6 +13,8 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background: url('./images/main_img.jpg');
+    background-size: cover;
 }
 
 header {
@@ -129,6 +131,8 @@ h1 {
     height: 100px; /* 버튼 높이 확대 */
     text-align: center;
     line-height: 60px; /* 텍스트 수직 정렬 */
+    /* background-color: rgba(200, 200, 200, 0.5); */
+    /* background-color 는 투명도 조절*/
 }
 
 .button:hover {
