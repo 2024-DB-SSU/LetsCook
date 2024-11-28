@@ -75,7 +75,7 @@
             const ulTag = document.createElement('ul');
             ingred_block.appendChild(ulTag);
             ingreds.forEach(ingred => {
-                const liTag = document.createElement('li');
+                const liTag = document.createElement('p');
                 liTag.textContent = ingred.trim();
                 ulTag.appendChild(liTag);
             })
@@ -99,7 +99,6 @@
         const like_buttons = document.querySelectorAll('.like-button')
         like_buttons.forEach(like_button=>{
             like_button.addEventListener('click', function(){
-                console.log("이벤트 발생")
                 const recipe_num = like_button.getAttribute('id').replace('like', '')
                 const Status = document.getElementById('status'+recipe_num).innerText
                 const Status_tag = document.getElementById('status'+recipe_num)

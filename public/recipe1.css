@@ -13,6 +13,8 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background: url('./images/main_img.jpg');
+    background-size: cover;
 }
 
 header {
@@ -193,7 +195,7 @@ h1 {
     line-height: 80px; /* 텍스트 수직 정렬 */
 
     margin-top: 20px; /* "오늘의 기분" 입력 필드와의 간격 */
-    transform: translateX(60px); /* 버튼을 오른쪽으로 20px 이동 */
+    margin-left: 55px; /* 버튼 오른쪽으로 이동 */
 }
 
 .large-button:hover {
@@ -219,4 +221,28 @@ footer {
 
 .logout-button:hover {
     background-color: #444;
+}
+
+/* 배경 박스 */
+.background-box {
+    position: relative;
+    width: 80%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* 회색 투명도 */
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}*/
+
+/* 내부 콘텐츠 박스 */
+.content-box {
+    background-color: rgba(255, 255, 255, 0.8); /* 흰색 반투명 */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 500px; /* 너비 */
+    max-width: 90%; /* 반응형 조정 */
 }

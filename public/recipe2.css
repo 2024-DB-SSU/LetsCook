@@ -17,6 +17,8 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background: url('./images/main_img.jpg');
+    background-size: cover;
 }
 
 /* 좌상단 제목 */

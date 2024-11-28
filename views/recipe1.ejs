@@ -81,16 +81,20 @@
 
         <!--오른쪽 영역(레시피 추천)-->
         <div class="right-side">
-            <form action="/recommend/done" method="POST">
-                <!--오늘의 기분 입력-->
-                <div class="status-input">
-                    <label for="prompt">오늘의 기분 : </label>
-                    <input type="text" name="prompt" id="prompt" placeholder="오늘의 기분을 입력하세요">
-                </div>
+            <div class="background-box">
+                <div class="content-box">
+                    <form action="/recommend/done" method="POST">
+                        <!--요리 스타일 입력-->
+                        <div class="status-input">
+                            <label for="prompt">요리 스타일 : </label>
+                            <input type="text" name="prompt" id="prompt" placeholder="원하는 요리 스타일을 입력하세요">
+                        </div>
 
-                <!--레시피 추천 버튼-->
-                <button type="submit" class="large-button" onclick="show_spinner()">레시피 추천</button>
-            </form>
+                        <!--레시피 추천 버튼-->
+                        <button type="submit" class="large-button" onclick="show_spinner()">레시피 추천</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 

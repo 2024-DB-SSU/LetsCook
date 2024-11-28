@@ -13,8 +13,8 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    /* background: url('./images/background.jpg') no-repeat center center fixed;
-    background-size: cover; */
+    background: url('./images/main_img.jpg');
+    background-size: cover;
 }
 
 /* 상단 제목 */
