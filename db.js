@@ -12,3 +12,6 @@ const pool = mysql.createPool({
 });
 
 module.exports = pool.promise();  // Promise 기반으로 사용하기 위해 promise() 호출
+
+// 현재 비활성화 된 상태
+// aws rds 인스턴스 생성후 연결 풀 생성 할 것
